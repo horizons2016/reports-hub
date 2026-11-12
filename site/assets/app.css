@@ -40,6 +40,7 @@ h1,h2,h3{margin:0;font-weight:600}
 main{padding-top:20px;padding-bottom:28px}
 .tab{display:flex;flex-direction:column;gap:16px}
 .tab[hidden]{display:none}
+.no-cat #pub-table th:nth-child(2),.no-cat #pub-table td:nth-child(2){display:none}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);min-width:0}
 .card.flush{padding:0;overflow:hidden}
 .card-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}

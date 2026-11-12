@@ -262,6 +262,7 @@ def _replay(ctx, req: dict, max_pages: int = 300) -> list[dict]:
             pass
         t[size_k] = 100 if isinstance(orig, int) else "100"
         first = send(t)
+        log(f"replay: API totals: {_totals(first)}")
         got = len(extract_records(first)) if first is not None else 0
         if got > size:
             size = got
@@ -290,6 +291,41 @@ def _replay(ctx, req: dict, max_pages: int = 300) -> list[dict]:
         out += new
     log(f"replay: {len(out)} records over {i + 1} requests (page size {size})")
     return out
+
+
+def _sample_raw(payload):
+    """First raw object that holds a file link, with long values trimmed (for diagnosing field names)."""
+    def visit(o):
+        if isinstance(o, dict):
+            if any(isinstance(v, str) and FILE_RE.search(v) for v in o.values()):
+                return {k: (v[:80] if isinstance(v, str) else v if not isinstance(v, (dict, list)) else
+                            {kk: (str(vv)[:60]) for kk, vv in v.items()} if isinstance(v, dict) else f"list[{len(v)}]")
+                        for k, v in o.items()}
+            for v in o.values():
+                r = visit(v)
+                if r:
+                    return r
+        elif isinstance(o, list):
+            for v in o:
+                r = visit(v)
+                if r:
+                    return r
+        return None
+    return visit(payload)
+
+
+def _totals(payload) -> str:
+    """Report any total/count fields the API returns, to confirm the harvest is complete."""
+    found = []
+    def visit(o, path=""):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                if str(k).lower() in ("total", "totalcount", "total_count", "count", "totalrecords", "last_page", "lastpage", "totalpages") and isinstance(v, (int, str)):
+                    found.append(f"{path}{k}={v}")
+                elif isinstance(v, dict):
+                    visit(v, f"{path}{k}.")
+    visit(payload)
+    return ", ".join(found[:6]) or "none"
 
 
 def browser_discover(pages: list[str]) -> tuple[list[dict], list[str], list[dict]]:
@@ -343,8 +379,11 @@ def browser_discover(pages: list[str]) -> tuple[list[dict], list[str], list[dict
         api_reqs, seen_keys, seen_recs, info = [], set(), [], []
         for rq, body in payloads:
             recs = extract_records(body)
-            info.append({"url": rq["url"], "method": rq["method"], "post_data": (rq["post_data"] or "")[:400],
-                         "records": len(recs), "top_keys": list(body)[:12] if isinstance(body, dict) else f"list[{len(body)}]"})
+            item = {"url": rq["url"], "method": rq["method"], "post_data": (rq["post_data"] or "")[:400],
+                    "records": len(recs), "top_keys": list(body)[:12] if isinstance(body, dict) else f"list[{len(body)}]"}
+            if recs:
+                item["sample_record"] = _sample_raw(body)
+            info.append(item)
             if recs:
                 seen_recs += recs
                 key = (rq["method"], rq["url"], rq["post_data"])

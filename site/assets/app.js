@@ -91,7 +91,8 @@
     const new7 = pubs.filter((p) => d(p.released_at) && now - d(p.released_at) <= 7 * DAY).length;
     const rev30 = state.events.filter((e) => REV_TYPES.has(e.type) && now - d(e.at) <= 30 * DAY).length;
     const prov = pubs.filter((p) => p.provisional);
-    const replaced = pubs.filter((p) => p.replaced_after_release).length;
+    const eligible = pubs.filter((p) => !p.migrated);
+    const replaced = eligible.filter((p) => p.replaced_after_release).length;
     const fresh = state.nsdp.filter((c) => c.freshness === "fresh").length;
     const provDays = state.settings.provisional_days || 15;
     const k = [
@@ -99,7 +100,7 @@
       ["جديد خلال 7 أيام", nf.format(new7), "حسب تاريخ النشر"],
       ["تعديلات خلال 30 يوماً", nf.format(rev30), "محتوى تغيّر بعد النشر", rev30 > 0],
       [`قيد المراجعة (${provDays} يوماً)`, nf.format(prov.length), "أرقامها قد تُعدَّل", prov.length > 0],
-      ["استُبدل ملفها بعد النشر", pubs.length ? `${Math.round((100 * replaced) / pubs.length)}%` : "—", `${nf.format(replaced)} إصداراً، حدّ أدنى تاريخي`],
+      ["استُبدل ملفها بعد النشر", eligible.length ? `${Math.round((100 * replaced) / eligible.length)}%` : "—", `${nf.format(replaced)} من ${nf.format(eligible.length)}، حدّ أدنى تاريخي`],
       ["فئات SDMX حديثة", state.nsdp.length ? `${fresh}/${state.nsdp.length}` : "—", "صفحة البيانات الموجزة"],
     ];
     $("#kpis").innerHTML = k.map(([lab, val, note, hl]) =>
@@ -183,6 +184,10 @@
   function setupPubFilters() {
     const cats = [...new Set(state.pubs.map((p) => p.category_ar || p.category_en).filter(Boolean))].sort((a, b) => a.localeCompare(b, "ar"));
     $("#f-cat").insertAdjacentHTML("beforeend", cats.map((c) => `<option>${esc(c)}</option>`).join(""));
+    if (!cats.length) {  // the API gives no category names yet: hide the filter and the column
+      $("#f-cat").hidden = true;
+      document.body.classList.add("no-cat");
+    }
     const years = [...new Set(state.pubs.map((p) => (p.released_at || "").slice(0, 4)).filter(Boolean))].sort().reverse();
     $("#f-year").insertAdjacentHTML("beforeend", years.map((y) => `<option>${y}</option>`).join(""));
     ["#f-q", "#f-cat", "#f-freq", "#f-status", "#f-year"].forEach((id) => $(id).addEventListener("input", () => { pubLimit = 50; renderPubs(); }));
@@ -240,7 +245,8 @@
         <div class="when">رُفع ${esc(dtTxt(v.uploaded))}${v.size ? ` · ${(v.size / 1048576).toFixed(1)} م.ب` : ""}${v.sha256 ? ` · بصمة ${esc(v.sha256.slice(0, 10))}` : ""}</div>
         <div class="when"><a href="${esc(safeUrl(v.url))}" target="_blank" rel="noopener">الرابط لدى المركز</a>${v.archive_url ? ` · <a href="${esc(safeUrl(v.archive_url))}">نسخة مؤرشفة</a>` : ""}</div></li>`).join("")}</ol></div>`).join("");
     const delay = p.current_file_delay_days;
-    const hist = p.replaced_after_release ? `<p class="small">الملف الحالي رُفع بعد ${esc(delay)} يوماً من النشر، أي أن الملف الأصلي استُبدل مرة واحدة على الأقل.</p>` : "";
+    const hist = p.replaced_after_release ? `<p class="small">الملف الحالي رُفع بعد ${esc(delay)} يوماً من النشر، أي أن الملف الأصلي استُبدل مرة واحدة على الأقل.</p>`
+      : p.migrated ? `<p class="small muted">إصدار من الأرشيف أُعيد رفع ملفاته عند نقل موقع المركز (سبتمبر–أكتوبر 2025).</p>` : "";
     tr.insertAdjacentHTML("afterend", `<tr class="detail"><td colspan="6">${hist}<div class="vers">${vs}</div>
       <p class="small muted">السلسلة: ${esc(p.series || "—")} · رقم الإصدار لدى المركز: ${esc(p.publication_id ?? "—")} · أول رصد: ${esc(dateTxt(p.first_seen))}</p></td></tr>`);
   }
@@ -255,19 +261,22 @@
       : `<p class="empty">لم يُرصد أي تعديل منذ بدء الرصد. عند حدوثه يظهر هنا مع رابطي النسختين.</p>`;
 
     // historical delays
-    const delays = state.pubs.filter((p) => p.replaced_after_release).map((p) => p.current_file_delay_days);
+    const eligible = state.pubs.filter((p) => !p.migrated);
+    const migrated = state.pubs.length - eligible.length;
+    const delays = eligible.filter((p) => p.replaced_after_release).map((p) => p.current_file_delay_days);
     const buckets = [["أقل من يوم", 0, 1], ["1–3 أيام", 1, 4], ["4–7 أيام", 4, 8], ["8–15 يوماً", 8, 16], ["16–30 يوماً", 16, 31], ["أكثر من 30", 31, 1e9]];
     const counts = buckets.map(([, a, b]) => delays.filter((x) => x >= a && x < b).length);
     hbar($("#rev-delays"), buckets.map((b, i) => ({ label: b[0], value: counts[i], strong: i >= 1 && i <= 3 })), "إصداراً");
     const within15 = delays.filter((x) => x < 16).length;
     $("#rev-note").innerHTML = state.pubs.length ? `
-      <p>من ${nf.format(state.pubs.length)} إصداراً، استُبدل ملف <b>${nf.format(delays.length)}</b> بعد نشره مرة واحدة على الأقل${delays.length ? `، و${nf.format(within15)} منها خلال 15 يوماً` : ""}.</p>
+      <p>من ${nf.format(eligible.length)} إصداراً، استُبدل ملف <b>${nf.format(delays.length)}</b> بعد نشره مرة واحدة على الأقل${delays.length ? `، و${nf.format(within15)} منها خلال 15 يوماً` : ""}.</p>
+      ${migrated ? `<p>استُبعد ${nf.format(migrated)} إصداراً قديماً أعاد المركز رفع ملفاته دفعةً واحدة عند نقل أرشيفه إلى الموقع الجديد (سبتمبر–أكتوبر 2025)؛ هذا نقل وليس تعديلاً.</p>` : ""}
       <p>الطريقة: نقارن وقت رفع الملف الحالي (مكتوب في اسمه) بوقت إنشاء سجل الإصدار لدى المركز. الفرق الأكبر من ربع ساعة يعني أن الملف الأصلي استُبدل.</p>
       <p>هذا حدّ أدنى: المركز يُبقي الملف الأخير فقط، فلا نعرف عدد مرات الاستبدال قبل بدء الرصد. منذ بدء الرصد تُعدّ كل نسخة.</p>` : `<p class="empty">تظهر القراءة بعد أول تشغيل.</p>`;
 
     // by series
     const by = {};
-    for (const p of state.pubs) {
+    for (const p of eligible) {
       const k = p.series || title(p);
       (by[k] ||= { n: 0, r: 0, delays: [], ar: p.title_ar ? p.title_ar.split(/[:：]/)[0].trim() : "" }).n++;
       if (p.replaced_after_release) { by[k].r++; by[k].delays.push(p.current_file_delay_days); }
@@ -390,6 +399,7 @@
       <p>تحليل إصدارات أبريل–سبتمبر 2026 أظهر أن كل أعداد النشرة الشهرية القابلة للفحص استُبدلت بعد نشرها، غالباً خلال 4 إلى 14 يوماً. لذلك يُعامَل كل إصدار كـ<b>قيد المراجعة</b> خلال أول ${prov} يوماً، وتُوسم أرقامه بأنها أولية.</p>
       <h2>ما قبل بدء الرصد</h2>
       <p>المركز يُبقي الملف الأخير فقط لكل إصدار. لذلك نستنتج الاستبدال التاريخي من الفرق بين وقت رفع الملف الحالي ووقت إنشاء سجل الإصدار (أكثر من ربع ساعة). هذا يثبت أن الملف استُبدل <i>مرة واحدة على الأقل</i>، ولا يكشف عدد المرات.</p>
+      <p>يُستثنى من ذلك أرشيف المركز القديم: عند نقل الموقع (سبتمبر–أكتوبر 2025) أُعيد رفع ملفات الإصدارات القديمة دفعةً واحدة بأسماء من نوع <code>publicationpdf…</code>. هذه نقل للأرشيف وليست تعديلات، فلا تُحسب في نسب الاستبدال.</p>
       <h2>حداثة بيانات SDMX</h2>
       <p>الفئة حديثة إذا لم تتأخر آخر فترة فيها عن اليوم أكثر من 4 أشهر للبيانات الشهرية، و7 للربعية، و18 للسنوية، وهي فترات النشر المعتادة لهذه البيانات. إن كان في الملف أكثر من دورية، تُحسب الأحدث نسبةً إلى فترتها.</p>
       <h2>حدود</h2>

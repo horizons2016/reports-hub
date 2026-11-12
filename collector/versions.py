@@ -15,6 +15,7 @@ Rule (see the methodology page):
 """
 from __future__ import annotations
 
+import re
 from datetime import timedelta
 
 from common import (ARCHIVE_OUT, days_between, fetch_file, file_ts, iso, log, now_utc,
@@ -70,7 +71,10 @@ def derive(pub: dict) -> None:
         from datetime import datetime, timezone
         delay = days_between(release, datetime.fromtimestamp(main["ts"], timezone.utc))
     pub["current_file_delay_days"] = delay
-    pub["replaced_after_release"] = bool(delay is not None and delay > 0.01)
+    # files named publicationpdf<ts>/publicationxls<ts> were re-uploaded in bulk when NCSI moved its
+    # archive to the new site (Sep-Oct 2025): a migration, not a revision
+    pub["migrated"] = any(re.search(r"/publication(pdf|xls)\d{10}\.", f.get("url", "")) for f in pub["files"].values())
+    pub["replaced_after_release"] = bool(delay is not None and delay > 0.01 and not pub["migrated"])
     prov = settings().get("provisional_days", 15)
     pub["provisional"] = bool(release and now_utc() - release <= timedelta(days=prov))
     pub["version_count"] = max((len(pub["versions"].get(s, [])) for s in pub["versions"]), default=0)
