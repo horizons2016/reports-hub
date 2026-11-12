@@ -1,0 +1,687 @@
+{
+ "updated_at": "2026-11-12T21:30:43Z",
+ "categories": [
+  {
+   "key": "NationalAccounts",
+   "ar": "الحسابات القومية (الناتج المحلي)",
+   "en": "National Accounts (GDP)",
+   "file": "NationalAccounts.XML",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CNationalAccounts.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CNationalAccounts.XML",
+   "sha256": "915030342981bed567182de6331039cf99bc983de14845116313c72e9b46b41d",
+   "series": 149,
+   "observations": 6036,
+   "frequencies": [
+    "A",
+    "Q"
+   ],
+   "first_period": "1998",
+   "latest_period": "2026-Q2",
+   "latest_period_end": "2026-06-30",
+   "main_frequency": "Q",
+   "latest_by_frequency": {
+    "A": "2025",
+    "Q": "2026-Q2"
+   },
+   "prepared": "2026-09-21T08:21:21Z",
+   "status": "ok",
+   "lag_months": 5,
+   "freshness": "fresh",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2026-Q2",
+     "sha256": "915030342981"
+    }
+   ]
+  },
+  {
+   "key": "ConsumerPriceIndex",
+   "ar": "الرقم القياسي لأسعار المستهلكين",
+   "en": "Consumer Price Index",
+   "file": "ConsumerPriceIndex.xml",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CConsumerPriceIndex.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CConsumerPriceIndex.xml",
+   "sha256": "b51e281883154c8286577e3a47b31e1b6d8c0ef091a294090dd32be0e0284ef7",
+   "series": 26,
+   "observations": 4264,
+   "frequencies": [
+    "M"
+   ],
+   "first_period": "2013-01",
+   "latest_period": "2026-08",
+   "latest_period_end": "2026-08-31",
+   "main_frequency": "M",
+   "latest_by_frequency": {
+    "M": "2026-08"
+   },
+   "prepared": "2026-09-16T05:52:40Z",
+   "status": "ok",
+   "lag_months": 3,
+   "freshness": "fresh",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2026-08",
+     "sha256": "b51e28188315"
+    }
+   ]
+  },
+  {
+   "key": "ProducerPriceIndex",
+   "ar": "الرقم القياسي لأسعار المنتجين",
+   "en": "Producer Price Index",
+   "file": "ProducerPriceIndex.XML",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CProducerPriceIndex.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CProducerPriceIndex.XML",
+   "sha256": "96ad0271cd2da6bd6bc91ad6bca462b031b6645e1a0d357f02e766d59528d887",
+   "series": 60,
+   "observations": 2040,
+   "frequencies": [
+    "Q"
+   ],
+   "first_period": "2018-Q1",
+   "latest_period": "2026-Q2",
+   "latest_period_end": "2026-06-30",
+   "main_frequency": "Q",
+   "latest_by_frequency": {
+    "Q": "2026-Q2"
+   },
+   "prepared": "2026-09-16T05:53:27Z",
+   "status": "ok",
+   "lag_months": 5,
+   "freshness": "fresh",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2026-Q2",
+     "sha256": "96ad0271cd2d"
+    }
+   ]
+  },
+  {
+   "key": "LaborMarket",
+   "ar": "سوق العمل",
+   "en": "Labor Market",
+   "file": "LaborMarket.xml",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CLaborMarket.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CLaborMarket.xml",
+   "sha256": "604a6506148f05b4ad1c6b8fb9d6f370bb7238e9c699c2e3e4c80f523c120b9e",
+   "series": 9,
+   "observations": 198,
+   "frequencies": [
+    "A"
+   ],
+   "first_period": "2004",
+   "latest_period": "2025",
+   "latest_period_end": "2025-12-31",
+   "main_frequency": "A",
+   "latest_by_frequency": {
+    "A": "2025"
+   },
+   "prepared": "2026-10-01T09:52:44Z",
+   "status": "ok",
+   "lag_months": 11,
+   "freshness": "fresh",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2025",
+     "sha256": "604a6506148f"
+    }
+   ]
+  },
+  {
+   "key": "Population",
+   "ar": "السكان",
+   "en": "Population",
+   "file": "Population.xml",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CPopulation.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CPopulation.xml",
+   "sha256": "006eebcab2db7ed34792ce47d547cc313ac129dba47e97211cd4a70673b9d4db",
+   "series": 3,
+   "observations": 120,
+   "frequencies": [
+    "A"
+   ],
+   "first_period": "1985",
+   "latest_period": "2024",
+   "latest_period_end": "2024-12-31",
+   "main_frequency": "A",
+   "latest_by_frequency": {
+    "A": "2024"
+   },
+   "prepared": "2025-05-26T05:56:57Z",
+   "status": "ok",
+   "lag_months": 23,
+   "freshness": "stale",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2024",
+     "sha256": "006eebcab2db"
+    }
+   ]
+  },
+  {
+   "key": "CentralGovernmentOperations",
+   "ar": "عمليات الحكومة المركزية (المالية العامة)",
+   "en": "Central Government Operations",
+   "file": "CentralGovernmentOperations.xml",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CCentralGovernmentOperations.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CCentralGovernmentOperations.xml",
+   "sha256": "f6763077f40119fbeb0db1c981825e01e4a24644d9ef79a052059acc8e3e6197",
+   "series": 51,
+   "observations": 4713,
+   "frequencies": [
+    "M"
+   ],
+   "first_period": "2004-09",
+   "latest_period": "2021-10",
+   "latest_period_end": "2021-10-31",
+   "main_frequency": "M",
+   "latest_by_frequency": {
+    "M": "2021-10"
+   },
+   "prepared": "2023-05-02T19:01:33Z",
+   "status": "ok",
+   "lag_months": 61,
+   "freshness": "stale",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2021-10",
+     "sha256": "f6763077f401"
+    }
+   ]
+  },
+  {
+   "key": "MerchandiseTrade",
+   "ar": "التجارة السلعية",
+   "en": "Merchandise Trade",
+   "file": "MerchandiseTrade.XML",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CMerchandiseTrade.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CMerchandiseTrade.XML",
+   "sha256": "cf667bb321ad60e64e8a04d1751d929f7919332b8fbda506395103e1e034751f",
+   "series": 29,
+   "observations": 5954,
+   "frequencies": [
+    "M"
+   ],
+   "first_period": "2006-07",
+   "latest_period": "2026-07",
+   "latest_period_end": "2026-07-31",
+   "main_frequency": "M",
+   "latest_by_frequency": {
+    "M": "2026-07"
+   },
+   "prepared": "2026-09-21T09:46:18Z",
+   "status": "ok",
+   "lag_months": 4,
+   "freshness": "stale",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2026-07",
+     "sha256": "cf667bb321ad"
+    }
+   ]
+  },
+  {
+   "key": "DirectionofTrade",
+   "ar": "التبادل التجاري حسب الدول",
+   "en": "Direction of Trade",
+   "file": "DirectionofTrade.XML",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CDirectionofTrade.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CDirectionofTrade.XML",
+   "sha256": "3b07b698758d07b20c8e5ff3d0dbf8b5cc7cf796858e53381a0bff51efa5e207",
+   "series": 491,
+   "observations": 62285,
+   "frequencies": [
+    "M"
+   ],
+   "first_period": "2016-01",
+   "latest_period": "2026-07",
+   "latest_period_end": "2026-07-31",
+   "main_frequency": "M",
+   "latest_by_frequency": {
+    "M": "2026-07"
+   },
+   "prepared": "2026-09-21T09:45:18Z",
+   "status": "ok",
+   "lag_months": 4,
+   "freshness": "stale",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2026-07",
+     "sha256": "3b07b698758d"
+    }
+   ]
+  },
+  {
+   "key": "OilProduction",
+   "ar": "إنتاج النفط",
+   "en": "Oil Production",
+   "file": "OilProduction.XML",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5COilProduction.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5COilProduction.XML",
+   "sha256": "24dfb52c1c497f03d666b1a1c28bf35c4fb53e302cf9fd7fbf69702a57743164",
+   "series": 8,
+   "observations": 1904,
+   "frequencies": [
+    "M"
+   ],
+   "first_period": "2006-10",
+   "latest_period": "2026-07",
+   "latest_period_end": "2026-07-31",
+   "main_frequency": "M",
+   "latest_by_frequency": {
+    "M": "2026-07"
+   },
+   "prepared": "2026-08-13T07:34:52Z",
+   "status": "ok",
+   "lag_months": 4,
+   "freshness": "stale",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2026-07",
+     "sha256": "24dfb52c1c49"
+    }
+   ]
+  },
+  {
+   "key": "BalanceofPayments",
+   "ar": "ميزان المدفوعات",
+   "en": "Balance of Payments",
+   "file": "BalanceofPayments.xml",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CBalanceofPayments.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CBalanceofPayments.xml",
+   "sha256": "0e9c9d3c0d478d64628c4f11d65ba2a13c79b89b9c6a28d78587a1006495e548",
+   "series": 116,
+   "observations": 580,
+   "frequencies": [
+    "A"
+   ],
+   "first_period": "2017",
+   "latest_period": "2021",
+   "latest_period_end": "2021-12-31",
+   "main_frequency": "A",
+   "latest_by_frequency": {
+    "A": "2021"
+   },
+   "prepared": "2024-01-22T06:02:44Z",
+   "status": "ok",
+   "lag_months": 59,
+   "freshness": "stale",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2021",
+     "sha256": "0e9c9d3c0d47"
+    }
+   ]
+  },
+  {
+   "key": "BalanceofPaymentsDetailed",
+   "ar": "ميزان المدفوعات (تفصيلي)",
+   "en": "Balance of Payments (detailed)",
+   "file": "BalanceofPaymentsdetailedpresentation.XML",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CBalanceofPaymentsdetailedpresentation.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CBalanceofPaymentsdetailedpresentation.XML",
+   "sha256": "f8e89c19e3dacab32cbf68081d54d9b1e14ac05a7f59b8db53f75500b31bdc33",
+   "series": 116,
+   "observations": 580,
+   "frequencies": [
+    "A"
+   ],
+   "first_period": "2017",
+   "latest_period": "2021",
+   "latest_period_end": "2021-12-31",
+   "main_frequency": "A",
+   "latest_by_frequency": {
+    "A": "2021"
+   },
+   "prepared": "2024-01-22T06:04:18Z",
+   "status": "ok",
+   "lag_months": 59,
+   "freshness": "stale",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2021",
+     "sha256": "f8e89c19e3da"
+    }
+   ]
+  },
+  {
+   "key": "OfficialReserveAssets",
+   "ar": "الأصول الاحتياطية الرسمية",
+   "en": "Official Reserve Assets",
+   "file": "OfficialReserveAssets.xml",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5COfficialReserveAssets.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5COfficialReserveAssets.xml",
+   "sha256": "730ed9e09c6a2eaf890d1189957d371738f11f8b005d6815e833be5e59e9aa2d",
+   "series": 6,
+   "observations": 1914,
+   "frequencies": [
+    "M"
+   ],
+   "first_period": "2000-01",
+   "latest_period": "2026-07",
+   "latest_period_end": "2026-07-31",
+   "main_frequency": "M",
+   "latest_by_frequency": {
+    "M": "2026-07"
+   },
+   "prepared": "2026-09-08T10:01:56Z",
+   "status": "ok",
+   "lag_months": 4,
+   "freshness": "stale",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2026-07",
+     "sha256": "730ed9e09c6a"
+    }
+   ]
+  },
+  {
+   "key": "ExchangeRates",
+   "ar": "أسعار الصرف",
+   "en": "Exchange Rates",
+   "file": "ExchangeRates.xml",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CExchangeRates.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CExchangeRates.xml",
+   "sha256": "e3a14d4274519c0abf31c77eece645aa0ee272b182c71fb5b64dfaa459278dac",
+   "series": 6,
+   "observations": 1842,
+   "frequencies": [
+    "M"
+   ],
+   "first_period": "2001-01",
+   "latest_period": "2026-07",
+   "latest_period_end": "2026-07-31",
+   "main_frequency": "M",
+   "latest_by_frequency": {
+    "M": "2026-07"
+   },
+   "prepared": "2026-09-08T10:00:32Z",
+   "status": "ok",
+   "lag_months": 4,
+   "freshness": "stale",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2026-07",
+     "sha256": "e3a14d427451"
+    }
+   ]
+  },
+  {
+   "key": "InterestRates",
+   "ar": "أسعار الفائدة",
+   "en": "Interest Rates",
+   "file": "InterestRates.xml",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CInterestRates.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CInterestRates.xml",
+   "sha256": "7cb8f86861219b266f7673ad4df4a6d2e478ec818a511b8efbd34f67d662e9f9",
+   "series": 15,
+   "observations": 3855,
+   "frequencies": [
+    "M"
+   ],
+   "first_period": "2003-01",
+   "latest_period": "2026-07",
+   "latest_period_end": "2026-07-31",
+   "main_frequency": "M",
+   "latest_by_frequency": {
+    "M": "2026-07"
+   },
+   "prepared": "2026-09-08T10:01:20Z",
+   "status": "ok",
+   "lag_months": 4,
+   "freshness": "stale",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2026-07",
+     "sha256": "7cb8f8686121"
+    }
+   ]
+  },
+  {
+   "key": "StockMarket",
+   "ar": "بورصة مسقط",
+   "en": "Stock Market",
+   "file": "StockMarket.XML",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CStockMarket.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CStockMarket.XML",
+   "sha256": "9a7af0b33d8a27f3737ccf3e63cf80878e635ce8feabd3f0746486a524d219f3",
+   "series": 1,
+   "observations": 163,
+   "frequencies": [
+    "M"
+   ],
+   "first_period": "2013-01",
+   "latest_period": "2026-07",
+   "latest_period_end": "2026-07-31",
+   "main_frequency": "M",
+   "latest_by_frequency": {
+    "M": "2026-07"
+   },
+   "prepared": "2026-08-13T07:30:08Z",
+   "status": "ok",
+   "lag_months": 4,
+   "freshness": "stale",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2026-07",
+     "sha256": "9a7af0b33d8a"
+    }
+   ]
+  },
+  {
+   "key": "DepositoryCorporationsSurvey",
+   "ar": "مسح شركات الإيداع",
+   "en": "Depository Corporations Survey",
+   "file": "DepositoryCorporationsSurvey.xml",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CDepositoryCorporationsSurvey.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CDepositoryCorporationsSurvey.xml",
+   "sha256": "53e7a62b85c53f091a829e1f76f09d2ad3752e355bac3119a66d5fce72cd1c88",
+   "series": 25,
+   "observations": 5225,
+   "frequencies": [
+    "M"
+   ],
+   "first_period": "2003-01",
+   "latest_period": "2026-07",
+   "latest_period_end": "2026-07-31",
+   "main_frequency": "M",
+   "latest_by_frequency": {
+    "M": "2026-07"
+   },
+   "prepared": "2026-09-08T09:58:23Z",
+   "status": "ok",
+   "lag_months": 4,
+   "freshness": "stale",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2026-07",
+     "sha256": "53e7a62b85c5"
+    }
+   ]
+  },
+  {
+   "key": "DepositoryCorporationsDetailed",
+   "ar": "مسح شركات الإيداع (تفصيلي)",
+   "en": "Depository Corporations Survey (detailed)",
+   "file": "DepositoryCorporationsSurveydetailedpresentationOman.XML",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CDepositoryCorporationsSurveydetailedpresentationOman.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CDepositoryCorporationsSurveydetailedpresentationOman.XML",
+   "sha256": "94117007a76d08e6eef8e1c475d53ca0830874d30dedd1b62c294a681a9c1b38",
+   "series": 1257,
+   "observations": 294365,
+   "frequencies": [
+    "M"
+   ],
+   "first_period": "2007-01",
+   "latest_period": "2026-07",
+   "latest_period_end": "2026-07-31",
+   "main_frequency": "M",
+   "latest_by_frequency": {
+    "M": "2026-07"
+   },
+   "prepared": "2026-09-21T08:20:20Z",
+   "status": "ok",
+   "lag_months": 4,
+   "freshness": "stale",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2026-07",
+     "sha256": "94117007a76d"
+    }
+   ]
+  },
+  {
+   "key": "CentralBankSurvey",
+   "ar": "مسح البنك المركزي",
+   "en": "Central Bank Survey",
+   "file": "CentralBankSurvey.xml",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CCentralBankSurvey.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CCentralBankSurvey.xml",
+   "sha256": "ebf129f027d9b54f5ea005ce2036289b7227b09d23bec7c51c0b0df5207db933",
+   "series": 31,
+   "observations": 7826,
+   "frequencies": [
+    "M"
+   ],
+   "first_period": "2003-01",
+   "latest_period": "2026-07",
+   "latest_period_end": "2026-07-31",
+   "main_frequency": "M",
+   "latest_by_frequency": {
+    "M": "2026-07"
+   },
+   "prepared": "2026-09-08T09:57:27Z",
+   "status": "ok",
+   "lag_months": 4,
+   "freshness": "stale",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2026-07",
+     "sha256": "ebf129f027d9"
+    }
+   ]
+  },
+  {
+   "key": "FinancialSoundnessIndicators",
+   "ar": "مؤشرات السلامة المالية",
+   "en": "Financial Soundness Indicators",
+   "file": "FinancialSoundnessIndicators.xml",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CFinancialSoundnessIndicators.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CFinancialSoundnessIndicators.xml",
+   "sha256": "cda2cfe28d98ed3fa1dbfca7ebedfc385359c75c541dec3a1574416e67c65fe0",
+   "series": 2,
+   "observations": 90,
+   "frequencies": [
+    "Q"
+   ],
+   "first_period": "2013-Q4",
+   "latest_period": "2025-Q3",
+   "latest_period_end": "2025-09-30",
+   "main_frequency": "Q",
+   "latest_by_frequency": {
+    "Q": "2025-Q3"
+   },
+   "prepared": "2025-11-05T08:08:19Z",
+   "status": "ok",
+   "lag_months": 14,
+   "freshness": "stale",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2025-Q3",
+     "sha256": "cda2cfe28d98"
+    }
+   ]
+  },
+  {
+   "key": "FinancialAccessSurvey",
+   "ar": "مسح الوصول المالي",
+   "en": "Financial Access Survey",
+   "file": "FinancialAccessSurveyOman.XML",
+   "checked_at": "2026-11-12T21:30:14Z",
+   "excel_url": "https://nsdp.ncsi.gov.om/.%5CFinancialAccessSurveyOman.xlsx",
+   "url": "https://nsdp.ncsi.gov.om/.%5CFinancialAccessSurveyOman.XML",
+   "sha256": "450ab40ce6ce92d89c1aa65264bb028b917b6f80b79b879bd43662e7a3d24464",
+   "series": 15,
+   "observations": 249,
+   "frequencies": [
+    "A"
+   ],
+   "first_period": "2004",
+   "latest_period": "2025",
+   "latest_period_end": "2025-12-31",
+   "main_frequency": "A",
+   "latest_by_frequency": {
+    "A": "2025"
+   },
+   "prepared": "2026-08-13T07:27:04Z",
+   "status": "ok",
+   "lag_months": 11,
+   "freshness": "fresh",
+   "last_changed": "2026-11-12T21:30:14Z",
+   "history": [
+    {
+     "at": "2026-11-12T21:30:14Z",
+     "latest_period": "2025",
+     "sha256": "450ab40ce6ce"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,365 @@
+{
+ "updated_at": "2026-11-12T21:30:43Z",
+ "publications": [
+  {
+   "id": "ncsi-pub-1974",
+   "publication_id": 1974,
+   "title_en": "Consumer Price Inflation Reportr :October 2026",
+   "title_ar": "تقرير التضخم لأسعار المستهلكين : أكتوبر 2026",
+   "category_en": null,
+   "category_ar": null,
+   "classification_id": 11,
+   "published_date": null,
+   "created_at": "2026-11-12T09:01:00.000000Z",
+   "updated_at": "2026-11-12T21:18:41.000000Z",
+   "cover_url": "https://api.ncsi.gov.om/uploads/coverimages/coverimage1794474389.png",
+   "files": {
+    "pdf_en": {
+     "url": "https://api.ncsi.gov.om/uploads/pdfs/consumer_price_inflation_reportr__october_2026_1794474060.pdf",
+     "ts": 1794474060
+    },
+    "pdf_ar": {
+     "url": "https://api.ncsi.gov.om/uploads/pdfs/consumer_price_inflation_reportr__october_2026_ar_1794474060.pdf",
+     "ts": 1794474060
+    }
+   },
+   "versions": {
+    "pdf_en": [
+     {
+      "v": 1,
+      "url": "https://api.ncsi.gov.om/uploads/pdfs/consumer_price_inflation_reportr__october_2026_1794474060.pdf",
+      "ts": 1794474060,
+      "uploaded": "2026-11-12T09:01:00Z",
+      "seen_at": "2026-11-12T21:28:20Z",
+      "status": "baseline",
+      "sha256": "ae43bd4a849c590f87ff1dfb94ebf506f3145f1ba219642facaa4978217445dc",
+      "size": 1200946,
+      "archive_url": "https://github.com/horizons2016/reports-hub/releases/download/archive-2026-11/consumer_price_inflation_reportr__october_2026_1794474060.pdf"
+     }
+    ],
+    "pdf_ar": [
+     {
+      "v": 1,
+      "url": "https://api.ncsi.gov.om/uploads/pdfs/consumer_price_inflation_reportr__october_2026_ar_1794474060.pdf",
+      "ts": 1794474060,
+      "uploaded": "2026-11-12T09:01:00Z",
+      "seen_at": "2026-11-12T21:28:20Z",
+      "status": "baseline",
+      "sha256": "ae43bd4a849c590f87ff1dfb94ebf506f3145f1ba219642facaa4978217445dc",
+      "size": 1200946,
+      "archive_url": "https://github.com/horizons2016/reports-hub/releases/download/archive-2026-11/consumer_price_inflation_reportr__october_2026_ar_1794474060.pdf"
+     }
+    ]
+   },
+   "first_seen": "2026-11-12T21:28:20Z",
+   "last_seen": "2026-11-12T21:28:20Z",
+   "frequency": "monthly",
+   "series": "Consumer Price Inflation Reportr",
+   "released_at": "2026-11-12T09:01:00Z",
+   "current_file_delay_days": 0.0,
+   "replaced_after_release": false,
+   "provisional": true,
+   "version_count": 1
+  },
+  {
+   "id": "ncsi-pub-1987",
+   "publication_id": 1987,
+   "title_en": "Omani Women Empowerment Guide 2016",
+   "title_ar": "دليل تمكين المرأة العمانية 2016",
+   "category_en": null,
+   "category_ar": null,
+   "classification_id": 4,
+   "published_date": null,
+   "created_at": "2026-11-11T07:40:16.000000Z",
+   "updated_at": "2026-11-12T05:14:12.000000Z",
+   "cover_url": "https://api.ncsi.gov.om/uploads/coverimages/coverimage1794382816.png",
+   "files": {
+    "pdf_en": {
+     "url": "https://api.ncsi.gov.om/uploads/pdfs/omani_women_empowerment_guide_2016_1794382816.pdf",
+     "ts": 1794382816
+    },
+    "pdf_ar": {
+     "url": "https://api.ncsi.gov.om/uploads/pdfs/omani_women_empowerment_guide_2016_ar_1794382816.pdf",
+     "ts": 1794382816
+    }
+   },
+   "versions": {
+    "pdf_en": [
+     {
+      "v": 1,
+      "url": "https://api.ncsi.gov.om/uploads/pdfs/omani_women_empowerment_guide_2016_1794382816.pdf",
+      "ts": 1794382816,
+      "uploaded": "2026-11-11T07:40:16Z",
+      "seen_at": "2026-11-12T21:28:20Z",
+      "status": "baseline",
+      "sha256": "0d7200881600983d8659d68816c9d5326b74102f138d9cbd20c1b2e28d21d392",
+      "size": 947344,
+      "archive_url": "https://github.com/horizons2016/reports-hub/releases/download/archive-2026-11/omani_women_empowerment_guide_2016_1794382816.pdf"
+     }
+    ],
+    "pdf_ar": [
+     {
+      "v": 1,
+      "url": "https://api.ncsi.gov.om/uploads/pdfs/omani_women_empowerment_guide_2016_ar_1794382816.pdf",
+      "ts": 1794382816,
+      "uploaded": "2026-11-11T07:40:16Z",
+      "seen_at": "2026-11-12T21:28:20Z",
+      "status": "baseline",
+      "sha256": "0d7200881600983d8659d68816c9d5326b74102f138d9cbd20c1b2e28d21d392",
+      "size": 947344,
+      "archive_url": "https://github.com/horizons2016/reports-hub/releases/download/archive-2026-11/omani_women_empowerment_guide_2016_ar_1794382816.pdf"
+     }
+    ]
+   },
+   "first_seen": "2026-11-12T21:28:20Z",
+   "last_seen": "2026-11-12T21:28:20Z",
+   "frequency": "annual",
+   "series": "Omani Women Empowerment Guide",
+   "released_at": "2026-11-11T07:40:16Z",
+   "current_file_delay_days": 0.0,
+   "replaced_after_release": false,
+   "provisional": true,
+   "version_count": 1
+  },
+  {
+   "id": "ncsi-pub-1986",
+   "publication_id": 1986,
+   "title_en": "Omani youth development index",
+   "title_ar": "دليل تنمية الشباب العماني",
+   "category_en": null,
+   "category_ar": null,
+   "classification_id": 4,
+   "published_date": null,
+   "created_at": "2026-11-11T07:38:06.000000Z",
+   "updated_at": "2026-11-12T10:29:32.000000Z",
+   "cover_url": "https://api.ncsi.gov.om/uploads/coverimages/coverimage1794382686.png",
+   "files": {
+    "pdf_en": {
+     "url": "https://api.ncsi.gov.om/uploads/pdfs/omani_youth_development_index_1794382686.pdf",
+     "ts": 1794382686
+    },
+    "pdf_ar": {
+     "url": "https://api.ncsi.gov.om/uploads/pdfs/omani_youth_development_index_ar_1794382686.pdf",
+     "ts": 1794382686
+    }
+   },
+   "versions": {
+    "pdf_en": [
+     {
+      "v": 1,
+      "url": "https://api.ncsi.gov.om/uploads/pdfs/omani_youth_development_index_1794382686.pdf",
+      "ts": 1794382686,
+      "uploaded": "2026-11-11T07:38:06Z",
+      "seen_at": "2026-11-12T21:28:20Z",
+      "status": "baseline",
+      "sha256": "7f469a50d36b890c74231a9341cd2139cb8cffe56fbc6809de4988676ee4512d",
+      "size": 5987818,
+      "archive_url": "https://github.com/horizons2016/reports-hub/releases/download/archive-2026-11/omani_youth_development_index_1794382686.pdf"
+     }
+    ],
+    "pdf_ar": [
+     {
+      "v": 1,
+      "url": "https://api.ncsi.gov.om/uploads/pdfs/omani_youth_development_index_ar_1794382686.pdf",
+      "ts": 1794382686,
+      "uploaded": "2026-11-11T07:38:06Z",
+      "seen_at": "2026-11-12T21:28:20Z",
+      "status": "baseline",
+      "sha256": "7f469a50d36b890c74231a9341cd2139cb8cffe56fbc6809de4988676ee4512d",
+      "size": 5987818,
+      "archive_url": "https://github.com/horizons2016/reports-hub/releases/download/archive-2026-11/omani_youth_development_index_ar_1794382686.pdf"
+     }
+    ]
+   },
+   "first_seen": "2026-11-12T21:28:20Z",
+   "last_seen": "2026-11-12T21:28:20Z",
+   "frequency": "other",
+   "series": "Omani youth development index",
+   "released_at": "2026-11-11T07:38:06Z",
+   "current_file_delay_days": 0.0,
+   "replaced_after_release": false,
+   "provisional": true,
+   "version_count": 1
+  },
+  {
+   "id": "ncsi-pub-1985",
+   "publication_id": 1985,
+   "title_en": "Omani womens empowerment guide",
+   "title_ar": "دليل تمكين المرأة العمانية",
+   "category_en": null,
+   "category_ar": null,
+   "classification_id": 4,
+   "published_date": null,
+   "created_at": "2026-11-11T07:36:00.000000Z",
+   "updated_at": "2026-11-12T14:04:04.000000Z",
+   "cover_url": "https://api.ncsi.gov.om/uploads/coverimages/coverimage1794382560.png",
+   "files": {
+    "pdf_en": {
+     "url": "https://api.ncsi.gov.om/uploads/pdfs/omani_womens_empowerment_guide_1794382560.pdf",
+     "ts": 1794382560
+    },
+    "pdf_ar": {
+     "url": "https://api.ncsi.gov.om/uploads/pdfs/omani_womens_empowerment_guide_ar_1794382560.pdf",
+     "ts": 1794382560
+    }
+   },
+   "versions": {
+    "pdf_en": [
+     {
+      "v": 1,
+      "url": "https://api.ncsi.gov.om/uploads/pdfs/omani_womens_empowerment_guide_1794382560.pdf",
+      "ts": 1794382560,
+      "uploaded": "2026-11-11T07:36:00Z",
+      "seen_at": "2026-11-12T21:28:20Z",
+      "status": "baseline",
+      "sha256": "94bb45a577a2bf8356f523c43576f058f67ff67d6bc0e6ba151f6bd53df31622",
+      "size": 3423080,
+      "archive_url": "https://github.com/horizons2016/reports-hub/releases/download/archive-2026-11/omani_womens_empowerment_guide_1794382560.pdf"
+     }
+    ],
+    "pdf_ar": [
+     {
+      "v": 1,
+      "url": "https://api.ncsi.gov.om/uploads/pdfs/omani_womens_empowerment_guide_ar_1794382560.pdf",
+      "ts": 1794382560,
+      "uploaded": "2026-11-11T07:36:00Z",
+      "seen_at": "2026-11-12T21:28:20Z",
+      "status": "baseline",
+      "sha256": "94bb45a577a2bf8356f523c43576f058f67ff67d6bc0e6ba151f6bd53df31622",
+      "size": 3423080,
+      "archive_url": "https://github.com/horizons2016/reports-hub/releases/download/archive-2026-11/omani_womens_empowerment_guide_ar_1794382560.pdf"
+     }
+    ]
+   },
+   "first_seen": "2026-11-12T21:28:20Z",
+   "last_seen": "2026-11-12T21:28:20Z",
+   "frequency": "other",
+   "series": "Omani womens empowerment guide",
+   "released_at": "2026-11-11T07:36:00Z",
+   "current_file_delay_days": 0.0,
+   "replaced_after_release": false,
+   "provisional": true,
+   "version_count": 1
+  },
+  {
+   "id": "ncsi-pub-1984",
+   "publication_id": 1984,
+   "title_en": "Child Well-being and Empowerment Guide",
+   "title_ar": "دليل رفاهية وتمكين الطفل",
+   "category_en": null,
+   "category_ar": null,
+   "classification_id": 4,
+   "published_date": null,
+   "created_at": "2026-11-11T07:32:40.000000Z",
+   "updated_at": "2026-11-11T08:43:50.000000Z",
+   "cover_url": "https://api.ncsi.gov.om/uploads/coverimages/coverimage1794382360.png",
+   "files": {
+    "pdf_en": {
+     "url": "https://api.ncsi.gov.om/uploads/pdfs/child_well-being_and_empowerment_guide_1794382360.pdf",
+     "ts": 1794382360
+    },
+    "pdf_ar": {
+     "url": "https://api.ncsi.gov.om/uploads/pdfs/child_well-being_and_empowerment_guide_ar_1794382360.pdf",
+     "ts": 1794382360
+    }
+   },
+   "versions": {
+    "pdf_en": [
+     {
+      "v": 1,
+      "url": "https://api.ncsi.gov.om/uploads/pdfs/child_well-being_and_empowerment_guide_1794382360.pdf",
+      "ts": 1794382360,
+      "uploaded": "2026-11-11T07:32:40Z",
+      "seen_at": "2026-11-12T21:28:20Z",
+      "status": "baseline",
+      "sha256": "59c70880f99a7d41dd9a03b7772a2c99a657a1074d5d67690c661d09e3cdfd07",
+      "size": 16552634,
+      "archive_url": "https://github.com/horizons2016/reports-hub/releases/download/archive-2026-11/child_well-being_and_empowerment_guide_1794382360.pdf"
+     }
+    ],
+    "pdf_ar": [
+     {
+      "v": 1,
+      "url": "https://api.ncsi.gov.om/uploads/pdfs/child_well-being_and_empowerment_guide_ar_1794382360.pdf",
+      "ts": 1794382360,
+      "uploaded": "2026-11-11T07:32:40Z",
+      "seen_at": "2026-11-12T21:28:20Z",
+      "status": "baseline",
+      "sha256": "59c70880f99a7d41dd9a03b7772a2c99a657a1074d5d67690c661d09e3cdfd07",
+      "size": 16552634,
+      "archive_url": "https://github.com/horizons2016/reports-hub/releases/download/archive-2026-11/child_well-being_and_empowerment_guide_ar_1794382360.pdf"
+     }
+    ]
+   },
+   "first_seen": "2026-11-12T21:28:20Z",
+   "last_seen": "2026-11-12T21:28:20Z",
+   "frequency": "other",
+   "series": "Child Well-being and Empowerment Guide",
+   "released_at": "2026-11-11T07:32:40Z",
+   "current_file_delay_days": 0.0,
+   "replaced_after_release": false,
+   "provisional": true,
+   "version_count": 1
+  },
+  {
+   "id": "ncsi-pub-1979",
+   "publication_id": 1979,
+   "title_en": "Tourism Indicators Repor t : April 2026",
+   "title_ar": "تقرير المؤشرات السياحية : أبريل 2026",
+   "category_en": null,
+   "category_ar": null,
+   "classification_id": 1,
+   "published_date": null,
+   "created_at": "2026-11-11T04:57:19.000000Z",
+   "updated_at": "2026-11-12T07:12:42.000000Z",
+   "cover_url": "https://api.ncsi.gov.om/uploads/coverimages/coverimage1794373039.png",
+   "files": {
+    "pdf_en": {
+     "url": "https://api.ncsi.gov.om/uploads/pdfs/tourism_indicators_repor_t___april_2026_1794373039.pdf",
+     "ts": 1794373039
+    },
+    "pdf_ar": {
+     "url": "https://api.ncsi.gov.om/uploads/pdfs/tourism_indicators_repor_t___april_2026_ar_1794373039.pdf",
+     "ts": 1794373039
+    }
+   },
+   "versions": {
+    "pdf_en": [
+     {
+      "v": 1,
+      "url": "https://api.ncsi.gov.om/uploads/pdfs/tourism_indicators_repor_t___april_2026_1794373039.pdf",
+      "ts": 1794373039,
+      "uploaded": "2026-11-11T04:57:19Z",
+      "seen_at": "2026-11-12T21:28:20Z",
+      "status": "baseline",
+      "sha256": "f977c3d4aad9b1e47c7b554a0c953a31f582685096e7b9c23391dd848c622752",
+      "size": 1522931,
+      "archive_url": "https://github.com/horizons2016/reports-hub/releases/download/archive-2026-11/tourism_indicators_repor_t___april_2026_1794373039.pdf"
+     }
+    ],
+    "pdf_ar": [
+     {
+      "v": 1,
+      "url": "https://api.ncsi.gov.om/uploads/pdfs/tourism_indicators_repor_t___april_2026_ar_1794373039.pdf",
+      "ts": 1794373039,
+      "uploaded": "2026-11-11T04:57:19Z",
+      "seen_at": "2026-11-12T21:28:20Z",
+      "status": "baseline",
+      "sha256": "f977c3d4aad9b1e47c7b554a0c953a31f582685096e7b9c23391dd848c622752",
+      "size": 1522931,
+      "archive_url": "https://github.com/horizons2016/reports-hub/releases/download/archive-2026-11/tourism_indicators_repor_t___april_2026_ar_1794373039.pdf"
+     }
+    ]
+   },
+   "first_seen": "2026-11-12T21:28:20Z",
+   "last_seen": "2026-11-12T21:28:20Z",
+   "frequency": "monthly",
+   "series": "Tourism Indicators Repor t",
+   "released_at": "2026-11-11T04:57:19Z",
+   "current_file_delay_days": 0.0,
+   "replaced_after_release": false,
+   "provisional": true,
+   "version_count": 1
+  }
+ ]
+}
