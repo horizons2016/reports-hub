@@ -254,6 +254,10 @@ def _replay(ctx, req: dict, max_pages: int = 300) -> list[dict]:
 
     t = dict(target)
     size = 6
+    # a stable order matters: sorting by created_at repeats/skips rows when many share one timestamp
+    for k, v in t.items():
+        if "sort" in str(k).lower() and isinstance(v, dict) and "field" in v:
+            t[k] = {**v, "field": "id", "direction": "desc"}
     if size_k:
         orig = target[size_k]
         try:
@@ -262,12 +266,25 @@ def _replay(ctx, req: dict, max_pages: int = 300) -> list[dict]:
             pass
         t[size_k] = 100 if isinstance(orig, int) else "100"
         first = send(t)
+        total = _total_int(first)
         log(f"replay: API totals: {_totals(first)}")
         got = len(extract_records(first)) if first is not None else 0
         if got > size:
             size = got
         else:
             t[size_k] = orig
+        # if the server allows it, take everything in one page
+        if total and total > size and page_k:
+            big = dict(t)
+            big[size_k] = total + 50 if isinstance(orig, int) else str(total + 50)
+            if page_k:
+                big[page_k] = 1 if isinstance(target[page_k], int) else "1"
+            whole = send(big)
+            recs = extract_records(whole) if whole is not None else []
+            uniq = {r["id"]: r for r in recs}
+            log(f"replay: one-page request -> {len(uniq)} of {total}")
+            if len(uniq) >= 0.98 * total:
+                return list(uniq.values())
     if not page_k and not off_k:
         return extract_records(send(t) or {})
 
@@ -326,6 +343,14 @@ def _totals(payload) -> str:
                     visit(v, f"{path}{k}.")
     visit(payload)
     return ", ".join(found[:6]) or "none"
+
+
+def _total_int(payload) -> int | None:
+    for part in _totals(payload).split(", "):
+        k, _, v = part.rpartition("=")
+        if k.rsplit(".", 1)[-1].lower() in ("total", "totalcount", "total_count", "totalrecords") and str(v).isdigit():
+            return int(v)
+    return None
 
 
 def browser_discover(pages: list[str]) -> tuple[list[dict], list[str], list[dict]]:

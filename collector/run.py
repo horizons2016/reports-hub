@@ -60,10 +60,12 @@ def main() -> int:
     extra = []
     if baseline and h["records"]:
         n = len(state["publications"])
-        replaced = sum(1 for p in state["publications"].values() if p.get("replaced_after_release"))
+        current = [p for p in state["publications"].values() if not p.get("migrated")]
+        replaced = sum(1 for p in current if p.get("replaced_after_release"))
         extra.append({"issue_title": f"بدء الرصد: {n} إصداراً من المركز",
                       "issue_body": (f"اكتمل أول تشغيل. سُجّل {n} إصداراً كنسخة أولى (v1).\n\n"
-                                     f"منها {replaced} إصداراً استُبدل ملفه بعد النشر مرة واحدة على الأقل قبل بدء الرصد.\n\n"
+                                     f"من {len(current)} إصداراً بالنظام الحالي، استُبدل ملف {replaced} بعد النشر مرة واحدة على الأقل قبل بدء الرصد. "
+                                     f"أُعيد رفع {n - len(current)} إصداراً من الأرشيف عند نقل موقع المركز، ولا يُحسب ذلك تعديلاً.\n\n"
                                      "من الآن: كل إصدار جديد أو تعديل يصلكم تنبيهاً هنا."),
                       "type": "baseline"})
     if not args.no_issues:

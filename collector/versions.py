@@ -84,6 +84,7 @@ def merge(state: dict, harvested: list[dict], baseline: bool) -> list[dict]:
     """Update state["publications"] in place; return events."""
     pubs: dict = state.setdefault("publications", {})
     events: list[dict] = []
+    backfilled: list[str] = []
     now = now_utc()
     tag = _release_tag(now)
     recent_days = settings().get("hash_recent_days_on_baseline", 45)
@@ -104,6 +105,10 @@ def merge(state: dict, harvested: list[dict], baseline: bool) -> list[dict]:
 
         release = parse_time(rec.get("created_at")) or parse_time(rec.get("published_date"))
         recent = bool(release and now - release <= timedelta(days=recent_days))
+        # an old publication seen for the first time (e.g. the API listed it late) is history, not news
+        quiet = baseline or (is_new and release is not None and now - release > timedelta(days=30))
+        if quiet and is_new and not baseline:
+            backfilled.append(pid)
 
         for slot, f in rec["files"].items():
             url, ts = f["url"], f.get("ts")
@@ -116,7 +121,7 @@ def merge(state: dict, harvested: list[dict], baseline: bool) -> list[dict]:
             vno = len(versions) + 1
             name = _archive_name(url, vno, False)
 
-            if baseline:
+            if quiet and is_new:
                 fp = _fingerprint(url, tag, name) if recent else None
                 status = "baseline"
             else:
@@ -147,7 +152,7 @@ def merge(state: dict, harvested: list[dict], baseline: bool) -> list[dict]:
             versions.append(v)
             cur["files"][slot] = {"url": url, "ts": ts}
 
-            if not baseline and status != "baseline":
+            if status != "baseline":
                 events.append({
                     "at": iso(now), "type": status, "id": pid, "slot": slot, "version": vno,
                     "title_ar": cur.get("title_ar"), "title_en": cur.get("title_en"),
@@ -157,6 +162,8 @@ def merge(state: dict, harvested: list[dict], baseline: bool) -> list[dict]:
                 })
         derive(cur)
 
+    if backfilled:
+        log(f"merge: {len(backfilled)} older publications recorded as history without alerts")
     # publications that were new this run: collapse their slot events into one "new" event
     collapsed, seen_new = [], set()
     for e in events:
