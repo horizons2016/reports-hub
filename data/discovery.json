@@ -1,7 +1,7 @@
 {
  "endpoints": [],
  "last_discovery": {
-  "at": "2026-11-12T21:38:30Z",
+  "at": "2026-11-12T21:50:55Z",
   "responses": [
    {
     "url": "https://api.ncsi.gov.om/V1/publications/list",
@@ -11,7 +11,41 @@
     "top_keys": [
      "message",
      "data"
-    ]
+    ],
+    "sample_record": {
+     "id": 1974,
+     "title_en": "Consumer Price Inflation Reportr :October 2026",
+     "title_ar": "تقرير التضخم لأسعار المستهلكين : أكتوبر 2026",
+     "cover_image": "coverimage1794474389.png",
+     "pdf_file": "consumer_price_inflation_reportr__october_2026_1794474060.pdf",
+     "pdf_file_ar": "consumer_price_inflation_reportr__october_2026_ar_1794474060.pdf",
+     "xls_file": null,
+     "xls_file_ar": null,
+     "show_in_home": 1,
+     "type": "url",
+     "classification_id": 11,
+     "views": 12,
+     "status": 1,
+     "publication_status": "published",
+     "estimated_date": null,
+     "estimated_month": null,
+     "avg_rating": "0.0",
+     "created_at": "2026-11-12T09:01:00.000000Z",
+     "updated_at": "2026-11-12T21:18:41.000000Z",
+     "cover_image_url": "https://api.ncsi.gov.om/uploads/coverimages/coverimage1794474389.png",
+     "pdf_file_url": "https://api.ncsi.gov.om/uploads/pdfs/consumer_price_inflation_reportr__october_2",
+     "pdf_file_url_ar": "https://api.ncsi.gov.om/uploads/pdfs/consumer_price_inflation_reportr__october_2",
+     "xls_file_url": null,
+     "xls_file_url_ar": null,
+     "classification_title": "Economic",
+     "classification": {
+      "id": "11",
+      "name": "Economic",
+      "name_ar": "الإقتصاد",
+      "created_at": "2025-07-15T06:21:04.000000Z",
+      "updated_at": "2025-07-15T06:21:04.000000Z"
+     }
+    }
    },
    {
     "url": "https://api.ncsi.gov.om/V1/publications/list",
@@ -21,7 +55,41 @@
     "top_keys": [
      "message",
      "data"
-    ]
+    ],
+    "sample_record": {
+     "id": 1974,
+     "title_en": "Consumer Price Inflation Reportr :October 2026",
+     "title_ar": "تقرير التضخم لأسعار المستهلكين : أكتوبر 2026",
+     "cover_image": "coverimage1794474389.png",
+     "pdf_file": "consumer_price_inflation_reportr__october_2026_1794474060.pdf",
+     "pdf_file_ar": "consumer_price_inflation_reportr__october_2026_ar_1794474060.pdf",
+     "xls_file": null,
+     "xls_file_ar": null,
+     "show_in_home": 1,
+     "type": "url",
+     "classification_id": 11,
+     "views": 12,
+     "status": 1,
+     "publication_status": "published",
+     "estimated_date": null,
+     "estimated_month": null,
+     "avg_rating": "0.0",
+     "created_at": "2026-11-12T09:01:00.000000Z",
+     "updated_at": "2026-11-12T21:18:41.000000Z",
+     "cover_image_url": "https://api.ncsi.gov.om/uploads/coverimages/coverimage1794474389.png",
+     "pdf_file_url": "https://api.ncsi.gov.om/uploads/pdfs/consumer_price_inflation_reportr__october_2",
+     "pdf_file_url_ar": "https://api.ncsi.gov.om/uploads/pdfs/consumer_price_inflation_reportr__october_2",
+     "xls_file_url": null,
+     "xls_file_url_ar": null,
+     "classification_title": "Economic",
+     "classification": {
+      "id": "11",
+      "name": "Economic",
+      "name_ar": "الإقتصاد",
+      "created_at": "2025-07-15T06:21:04.000000Z",
+      "updated_at": "2025-07-15T06:21:04.000000Z"
+     }
+    }
    },
    {
     "url": "https://api.ncsi.gov.om/V1/publications/list",
@@ -31,7 +99,41 @@
     "top_keys": [
      "message",
      "data"
-    ]
+    ],
+    "sample_record": {
+     "id": 1974,
+     "title_en": "Consumer Price Inflation Reportr :October 2026",
+     "title_ar": "تقرير التضخم لأسعار المستهلكين : أكتوبر 2026",
+     "cover_image": "coverimage1794474389.png",
+     "pdf_file": "consumer_price_inflation_reportr__october_2026_1794474060.pdf",
+     "pdf_file_ar": "consumer_price_inflation_reportr__october_2026_ar_1794474060.pdf",
+     "xls_file": null,
+     "xls_file_ar": null,
+     "show_in_home": 1,
+     "type": "url",
+     "classification_id": 11,
+     "views": 12,
+     "status": 1,
+     "publication_status": "published",
+     "estimated_date": null,
+     "estimated_month": null,
+     "avg_rating": "0.0",
+     "created_at": "2026-11-12T09:01:00.000000Z",
+     "updated_at": "2026-11-12T21:18:41.000000Z",
+     "cover_image_url": "https://api.ncsi.gov.om/uploads/coverimages/coverimage1794474389.png",
+     "pdf_file_url": "https://api.ncsi.gov.om/uploads/pdfs/consumer_price_inflation_reportr__october_2",
+     "pdf_file_url_ar": "https://api.ncsi.gov.om/uploads/pdfs/consumer_price_inflation_reportr__october_2",
+     "xls_file_url": null,
+     "xls_file_url_ar": null,
+     "classification_title": "Economic",
+     "classification": {
+      "id": "11",
+      "name": "Economic",
+      "name_ar": "الإقتصاد",
+      "created_at": "2025-07-15T06:21:04.000000Z",
+      "updated_at": "2025-07-15T06:21:04.000000Z"
+     }
+    }
    },
    {
     "url": "https://api.ncsi.gov.om/V1/publications/list",
@@ -41,7 +143,41 @@
     "top_keys": [
      "message",
      "data"
-    ]
+    ],
+    "sample_record": {
+     "id": 1974,
+     "title_en": "Consumer Price Inflation Reportr :October 2026",
+     "title_ar": "تقرير التضخم لأسعار المستهلكين : أكتوبر 2026",
+     "cover_image": "coverimage1794474389.png",
+     "pdf_file": "consumer_price_inflation_reportr__october_2026_1794474060.pdf",
+     "pdf_file_ar": "consumer_price_inflation_reportr__october_2026_ar_1794474060.pdf",
+     "xls_file": null,
+     "xls_file_ar": null,
+     "show_in_home": 1,
+     "type": "url",
+     "classification_id": 11,
+     "views": 12,
+     "status": 1,
+     "publication_status": "published",
+     "estimated_date": null,
+     "estimated_month": null,
+     "avg_rating": "0.0",
+     "created_at": "2026-11-12T09:01:00.000000Z",
+     "updated_at": "2026-11-12T21:18:41.000000Z",
+     "cover_image_url": "https://api.ncsi.gov.om/uploads/coverimages/coverimage1794474389.png",
+     "pdf_file_url": "https://api.ncsi.gov.om/uploads/pdfs/consumer_price_inflation_reportr__october_2",
+     "pdf_file_url_ar": "https://api.ncsi.gov.om/uploads/pdfs/consumer_price_inflation_reportr__october_2",
+     "xls_file_url": null,
+     "xls_file_url_ar": null,
+     "classification_title": "Economic",
+     "classification": {
+      "id": "11",
+      "name": "Economic",
+      "name_ar": "الإقتصاد",
+      "created_at": "2025-07-15T06:21:04.000000Z",
+      "updated_at": "2025-07-15T06:21:04.000000Z"
+     }
+    }
    },
    {
     "url": "https://www.ncsi.gov.om/_next/data/JaLbQ93PePRgzOHmLum1B/ar/event-details/33.json?id=33",

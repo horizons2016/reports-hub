@@ -1,12 +1,12 @@
 {
  "repository": "horizons2016/reports-hub",
- "last_run": "2026-11-12T21:36:59Z",
- "finished": "2026-11-12T21:46:06Z",
+ "last_run": "2026-11-12T21:49:24Z",
+ "finished": "2026-11-12T21:53:54Z",
  "harvest_method": "api-replay",
  "endpoints": [],
  "publications": 412,
  "events_this_run": 0,
- "baseline_run": true,
+ "baseline_run": false,
  "harvest_ok": true,
  "nsdp_ok": 20,
  "monitoring_since": "2026-11-12T21:36:59Z"
