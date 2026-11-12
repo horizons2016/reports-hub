@@ -283,6 +283,7 @@ def _replay(ctx, req: dict, max_pages: int = 300) -> list[dict]:
             recs = extract_records(whole) if whole is not None else []
             uniq = {r["id"]: r for r in recs}
             log(f"replay: one-page request -> {len(uniq)} of {total}")
+            _diagnose_unmatched(whole)
             if len(uniq) >= 0.98 * total:
                 return list(uniq.values())
     if not page_k and not off_k:
@@ -343,6 +344,36 @@ def _totals(payload) -> str:
                     visit(v, f"{path}{k}.")
     visit(payload)
     return ", ".join(found[:6]) or "none"
+
+
+def _diagnose_unmatched(payload) -> None:
+    """Log the shape of list items that did not yield a publication (to find other file-link formats)."""
+    lists = []
+    def visit(o):
+        if isinstance(o, list) and o and all(isinstance(x, dict) for x in o[:5]):
+            lists.append(o)
+        elif isinstance(o, dict):
+            for v in o.values():
+                visit(v)
+        elif isinstance(o, list):
+            for v in o:
+                visit(v)
+    visit(payload)
+    if not lists:
+        log("diagnose: no list of objects in the response")
+        return
+    items = max(lists, key=len)
+    bad = [x for x in items if not extract_records(x)]
+    log(f"diagnose: {len(items)} items in the response, {len(bad)} without a recognised file link")
+    samples = []
+    for x in bad[:3]:
+        samples.append({k: (v[:120] if isinstance(v, str) else v if not isinstance(v, (dict, list))
+                            else json.dumps(v, ensure_ascii=False)[:200]) for k, v in x.items()})
+    for s in samples:
+        log("diagnose: sample " + json.dumps(s, ensure_ascii=False)[:1500])
+    d = load_json(DISCOVERY, {})
+    d["unmatched"] = {"items": len(items), "without_link": len(bad), "samples": samples}
+    save_json(DISCOVERY, d)
 
 
 def _total_int(payload) -> int | None:
@@ -468,6 +499,7 @@ def harvest() -> dict:
         chosen = next((i["chosen"] for i in info if "chosen" in i), "browser")
         records = crawled if len({r["id"] for r in crawled}) > len({r["id"] for r in recs}) else recs
         method = "api-direct-get" if records is crawled and crawled else chosen
+        disc = {**disc, **{k: v for k, v in load_json(DISCOVERY, {}).items() if k == "unmatched"}}
         disc["endpoints"] = endpoints  # only GET endpoints that work without the browser
         disc["last_discovery"] = {"at": iso(now_utc()), "responses": info[:40], "method": method}
         save_json(DISCOVERY, disc)
