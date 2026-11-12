@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مستودع البحوث والتقارير</title>
+<meta name="description" content="رصد إصدارات المركز الوطني للإحصاء والمعلومات ونسخها وتحديثاتها">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="alternate" type="application/atom+xml" title="التنبيهات" href="data/feed.xml">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d4e89'/%3E%3Cpath d='M9 22V10h3v12zm5.5 0V14h3v8zm5.5 0v-5h3v5z' fill='white'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="7"/><path d="M9 22V10h3v12zm5.5 0V14h3v8zm5.5 0v-5h3v5z"/></svg></div>
+      <div>
+        <h1>مستودع البحوث والتقارير</h1>
+        <p class="sub">رصد إصدارات المركز الوطني للإحصاء والمعلومات، ونسخها، وتحديثاتها</p>
+      </div>
+    </div>
+    <div class="run" id="run-status"><span class="dot"></span><span>جارٍ التحميل…</span></div>
+  </div>
+  <nav class="wrap tabs" id="tabs" aria-label="الأقسام">
+    <a href="#overview" data-tab="overview">نظرة عامة</a>
+    <a href="#publications" data-tab="publications">الإصدارات</a>
+    <a href="#revisions" data-tab="revisions">التعديلات</a>
+    <a href="#sdmx" data-tab="sdmx">بيانات SDMX</a>
+    <a href="#alerts" data-tab="alerts">التنبيهات</a>
+    <a href="#indicators" data-tab="indicators">المؤشرات</a>
+    <a href="#method" data-tab="method">المنهجية</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div id="banner"></div>
+
+  <!-- نظرة عامة -->
+  <section id="tab-overview" class="tab">
+    <div class="kpis" id="kpis"></div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-h"><h2>آخر التنبيهات</h2><a href="#alerts" class="more">الكل</a></div>
+        <ul class="feed" id="ov-events"></ul>
+      </div>
+      <div class="card">
+        <div class="card-h"><h2>قيد المراجعة الآن</h2><span class="hint" id="prov-hint"></span></div>
+        <ul class="feed" id="ov-provisional"></ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-h"><h2>الإصدارات شهرياً</h2><span class="hint">آخر 24 شهراً، حسب تاريخ النشر · الجزء الداكن: ما استُبدل ملفه بعد النشر</span></div>
+      <div class="chart" id="ov-months"></div>
+    </div>
+  </section>
+
+  <!-- الإصدارات -->
+  <section id="tab-publications" class="tab" hidden>
+    <div class="filters">
+      <input id="f-q" type="search" placeholder="ابحث بالعنوان، عربي أو إنجليزي…" aria-label="بحث">
+      <select id="f-cat" aria-label="الفئة"><option value="">كل الفئات</option></select>
+      <select id="f-freq" aria-label="الدورية">
+        <option value="">كل الدوريات</option><option value="monthly">شهري</option><option value="quarterly">ربعي</option>
+        <option value="annual">سنوي</option><option value="weekly">أسبوعي</option><option value="other">أخرى</option>
+      </select>
+      <select id="f-status" aria-label="الحالة">
+        <option value="">كل الحالات</option><option value="provisional">قيد المراجعة</option>
+        <option value="versions">له أكثر من نسخة</option><option value="replaced">استُبدل بعد النشر</option>
+      </select>
+      <select id="f-year" aria-label="السنة"><option value="">كل السنوات</option></select>
+    </div>
+    <p class="count" id="pub-count"></p>
+    <div class="card flush">
+      <table class="tbl" id="pub-table">
+        <thead><tr><th>الإصدار</th><th class="hide-s">الفئة</th><th>الدورية</th><th>النشر</th><th>النسخ</th><th>الملفات</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <button class="btn" id="pub-more" hidden>عرض المزيد</button>
+  </section>
+
+  <!-- التعديلات -->
+  <section id="tab-revisions" class="tab" hidden>
+    <div class="card">
+      <div class="card-h"><h2>تعديلات رُصدت منذ بدء الرصد</h2><span class="hint" id="since-hint"></span></div>
+      <div id="rev-live"></div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-h"><h2>كم تأخر الاستبدال؟</h2><span class="hint">الأيام بين النشر ورفع الملف الحالي، للإصدارات المستبدلة</span></div>
+        <div class="chart" id="rev-delays"></div>
+      </div>
+      <div class="card">
+        <div class="card-h"><h2>كيف نقرأ هذا</h2></div>
+        <div class="prose small" id="rev-note"></div>
+      </div>
+    </div>
+    <div class="card flush">
+      <div class="card-h pad"><h2>الاستبدال بعد النشر حسب السلسلة</h2><span class="hint">قبل بدء الرصد: حدّ أدنى، لأن المركز يُبقي الملف الأخير فقط</span></div>
+      <table class="tbl" id="series-table">
+        <thead><tr><th>السلسلة</th><th>الإصدارات</th><th>استُبدل بعد النشر</th><th>النسبة</th><th class="hide-s">وسيط التأخر</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SDMX -->
+  <section id="tab-sdmx" class="tab" hidden>
+    <div class="card">
+      <div class="card-h"><h2>صفحة البيانات الوطنية الموجزة</h2><span class="hint">20 فئة بصيغة SDMX، وفق معيار صندوق النقد الدولي e-GDDS</span></div>
+      <p class="small muted">الفئة «حديثة» إذا لم تتأخر آخر فترة فيها عن اليوم أكثر من 3 أشهر (شهري)، أو 6 أشهر (ربعي)، أو 18 شهراً (سنوي).</p>
+      <div class="sdmx-sum" id="sdmx-sum"></div>
+    </div>
+    <div class="sdmx-grid" id="sdmx-grid"></div>
+  </section>
+
+  <!-- التنبيهات -->
+  <section id="tab-alerts" class="tab" hidden>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-h"><h2>كيف تصلك التنبيهات</h2></div>
+        <ol class="steps" id="subscribe"></ol>
+      </div>
+      <div class="card">
+        <div class="card-h"><h2>أنواع التنبيهات</h2></div>
+        <ul class="legend" id="legend"></ul>
+      </div>
+    </div>
+    <div class="filters"><select id="f-type" aria-label="النوع"><option value="">كل الأنواع</option></select></div>
+    <div class="card flush">
+      <table class="tbl" id="ev-table">
+        <thead><tr><th>الوقت</th><th>النوع</th><th>الإصدار</th><th class="hide-s">الملف</th><th>روابط</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- المؤشرات -->
+  <section id="tab-indicators" class="tab" hidden>
+    <div class="card">
+      <div class="card-h"><h2>ربط المؤشرات بمصادر المركز</h2></div>
+      <div class="prose" id="ind-intro"></div>
+      <div id="ind-list"></div>
+    </div>
+    <div class="card flush">
+      <div class="card-h pad"><h2>جداول النشرة الشهرية وأفضل مصدر آلي لكل جدول</h2><span class="hint">الربط بالمحاور اقتراح أولي للمراجعة</span></div>
+      <table class="tbl" id="bt-table">
+        <thead><tr><th>الجدول</th><th>العنوان</th><th>الدورية</th><th>المحور</th><th>أفضل مصدر</th><th class="hide-s">الحالة الآن</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- المنهجية -->
+  <section id="tab-method" class="tab" hidden>
+    <div class="card prose" id="method"></div>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <span>المصدر: <a href="https://www.ncsi.gov.om/" rel="noopener">المركز الوطني للإحصاء والمعلومات</a> و<a href="https://nsdp.ncsi.gov.om/" rel="noopener">صفحة البيانات الوطنية الموجزة</a>. هذا المستودع مستقل لأغراض الرصد والتحليل.</span>
+  <span><a id="repo-link" href="#">المستودع على GitHub</a> · <a href="data/feed.xml">RSS</a></span>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{
+  "site_title_ar": "مستودع البحوث والتقارير",
+  "site_title_en": "Reports Hub",
+  "timezone": "Asia/Muscat",
+  "provisional_days": 15,
+  "hash_recent_days_on_baseline": 45,
+  "max_issues_per_run": 15,
+  "archive_files": true,
+  "publication_pages": [
+    "https://www.ncsi.gov.om/publications",
+    "https://www.ncsi.gov.om/ar/publications",
+    "https://www.ncsi.gov.om/"
+  ],
+  "file_host": "https://api.ncsi.gov.om/",
+  "nsdp_base": "https://nsdp.ncsi.gov.om/",
+  "nsdp_files": [
+    {"key": "NationalAccounts", "file": "NationalAccounts.XML", "ar": "الحسابات القومية (الناتج المحلي)", "en": "National Accounts (GDP)"},
+    {"key": "ConsumerPriceIndex", "file": "ConsumerPriceIndex.xml", "ar": "الرقم القياسي لأسعار المستهلكين", "en": "Consumer Price Index"},
+    {"key": "ProducerPriceIndex", "file": "ProducerPriceIndex.XML", "ar": "الرقم القياسي لأسعار المنتجين", "en": "Producer Price Index"},
+    {"key": "LaborMarket", "file": "LaborMarket.xml", "ar": "سوق العمل", "en": "Labor Market"},
+    {"key": "Population", "file": "Population.xml", "ar": "السكان", "en": "Population"},
+    {"key": "CentralGovernmentOperations", "file": "CentralGovernmentOperations.xml", "ar": "عمليات الحكومة المركزية (المالية العامة)", "en": "Central Government Operations"},
+    {"key": "MerchandiseTrade", "file": "MerchandiseTrade.XML", "ar": "التجارة السلعية", "en": "Merchandise Trade"},
+    {"key": "DirectionofTrade", "file": "DirectionofTrade.XML", "ar": "التبادل التجاري حسب الدول", "en": "Direction of Trade"},
+    {"key": "OilProduction", "file": "OilProduction.XML", "ar": "إنتاج النفط", "en": "Oil Production"},
+    {"key": "BalanceofPayments", "file": "BalanceofPayments.xml", "ar": "ميزان المدفوعات", "en": "Balance of Payments"},
+    {"key": "BalanceofPaymentsDetailed", "file": "BalanceofPaymentsdetailedpresentation.XML", "ar": "ميزان المدفوعات (تفصيلي)", "en": "Balance of Payments (detailed)"},
+    {"key": "OfficialReserveAssets", "file": "OfficialReserveAssets.xml", "ar": "الأصول الاحتياطية الرسمية", "en": "Official Reserve Assets"},
+    {"key": "ExchangeRates", "file": "ExchangeRates.xml", "ar": "أسعار الصرف", "en": "Exchange Rates"},
+    {"key": "InterestRates", "file": "InterestRates.xml", "ar": "أسعار الفائدة", "en": "Interest Rates"},
+    {"key": "StockMarket", "file": "StockMarket.XML", "ar": "بورصة مسقط", "en": "Stock Market"},
+    {"key": "DepositoryCorporationsSurvey", "file": "DepositoryCorporationsSurvey.xml", "ar": "مسح شركات الإيداع", "en": "Depository Corporations Survey"},
+    {"key": "DepositoryCorporationsDetailed", "file": "DepositoryCorporationsSurveydetailedpresentationOman.XML", "ar": "مسح شركات الإيداع (تفصيلي)", "en": "Depository Corporations Survey (detailed)"},
+    {"key": "CentralBankSurvey", "file": "CentralBankSurvey.xml", "ar": "مسح البنك المركزي", "en": "Central Bank Survey"},
+    {"key": "FinancialSoundnessIndicators", "file": "FinancialSoundnessIndicators.xml", "ar": "مؤشرات السلامة المالية", "en": "Financial Soundness Indicators"},
+    {"key": "FinancialAccessSurvey", "file": "FinancialAccessSurveyOman.XML", "ar": "مسح الوصول المالي", "en": "Financial Access Survey"}
+  ]
+}

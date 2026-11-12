@@ -1,0 +1,4 @@
+{
+  "_about": "ربط مؤشرات الرؤية بمصادر بيانات المركز. أضف مؤشراً لكل عنصر في indicators. الحقول: id رمز المؤشر، name_ar الاسم، priority الأولوية، methodology المنهجية المختصرة، sources قائمة المصادر (type: publication_series أو nsdp أو bulletin_table)، needs ما نحتاجه من المركز. القائمة فارغة حتى تُضاف منهجيات المؤشرات المعتمدة.",
+  "indicators": []
+}
