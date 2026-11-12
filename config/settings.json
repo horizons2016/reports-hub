@@ -5,6 +5,7 @@
   "provisional_days": 15,
   "hash_recent_days_on_baseline": 45,
   "max_issues_per_run": 15,
+  "min_baseline_publications": 30,
   "archive_files": true,
   "publication_pages": [
     "https://www.ncsi.gov.om/publications",

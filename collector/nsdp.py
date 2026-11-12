@@ -81,14 +81,27 @@ def summarize(xml: bytes) -> dict:
     }
 
 
+LIMITS = {"M": 4, "Q": 7, "S": 12, "A": 18}  # months of lag still counted as fresh
+
+
 def freshness(entry: dict) -> str:
-    if entry.get("status") != "ok" or not entry.get("latest_period_end"):
+    """Fresh if any frequency in the file is within its normal publication lag."""
+    if entry.get("status") != "ok" or not entry.get("latest_by_frequency"):
         return "unavailable"
-    end = date.fromisoformat(entry["latest_period_end"])
-    months = (date.today().year - end.year) * 12 + date.today().month - end.month
-    limit = {"M": 3, "Q": 6}.get(entry.get("main_frequency"), 18)
-    entry["lag_months"] = months
-    return "fresh" if months <= limit else "stale"
+    today = date.today()
+    best = None
+    for f, p in entry["latest_by_frequency"].items():
+        end = period_end(p)
+        if end is None:
+            continue
+        lag = (today.year - end.year) * 12 + today.month - end.month
+        ratio = lag / LIMITS.get(f, 18)
+        if best is None or ratio < best[0]:
+            best = (ratio, lag, f, p)
+    if best is None:
+        return "unavailable"
+    entry["lag_months"], entry["main_frequency"], entry["latest_period"] = best[1], best[2], best[3]
+    return "fresh" if best[0] <= 1 else "stale"
 
 
 def check(state: dict, baseline: bool) -> list[dict]:

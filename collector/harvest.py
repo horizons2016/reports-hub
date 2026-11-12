@@ -15,6 +15,7 @@ Whatever shape the API returns, records are recognised by containing a link to
 """
 from __future__ import annotations
 
+import json
 import re
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
@@ -209,18 +210,102 @@ def crawl_endpoint(url: str, first=None, max_pages: int = 400) -> list[dict]:
 
 
 # ---------------------------------------------------------------- discovery
+PAGE_KEYS = ("page", "pagenumber", "pageno", "page_number", "current_page", "currentpage", "pageindex", "page_index")
+OFFSET_KEYS = ("offset", "skip", "start")
+SIZE_KEYS = ("limit", "per_page", "perpage", "pagesize", "page_size", "size", "take", "length", "rows", "count")
+
+
+def _find_key(d: dict, names) -> str | None:
+    for k in d:
+        if str(k).lower() in names:
+            return k
+    return None
+
+
+def _replay(ctx, req: dict, max_pages: int = 300) -> list[dict]:
+    """Page through a list API by re-sending the website's own request with changed paging fields."""
+    body = None
+    if req.get("post_data"):
+        try:
+            body = json.loads(req["post_data"])
+        except ValueError:
+            body = None
+    p = urlparse(req["url"])
+    query = dict(parse_qsl(p.query, keep_blank_values=True))
+    target = body if isinstance(body, dict) else query
+    page_k, off_k, size_k = _find_key(target, PAGE_KEYS), _find_key(target, OFFSET_KEYS), _find_key(target, SIZE_KEYS)
+    log(f"replay: {req['method']} {req['url']} body={'json' if isinstance(body, dict) else 'none'} "
+        f"page_key={page_k} offset_key={off_k} size_key={size_k}")
+    headers = {k: v for k, v in req.get("headers", {}).items()
+               if k.lower() not in ("content-length", "host", "connection", "accept-encoding")}
+
+    def send(t: dict):
+        url, data = req["url"], None
+        if isinstance(body, dict):
+            data = json.dumps(t)
+        else:
+            url = urlunparse(p._replace(query=urlencode(t)))
+        try:
+            r = ctx.request.fetch(url, method=req["method"], headers=headers, data=data, timeout=60000)
+            return r.json() if r.ok else None
+        except Exception as e:
+            log("replay: request failed", type(e).__name__, str(e)[:120])
+            return None
+
+    t = dict(target)
+    size = 6
+    if size_k:
+        orig = target[size_k]
+        try:
+            size = int(orig)
+        except (TypeError, ValueError):
+            pass
+        t[size_k] = 100 if isinstance(orig, int) else "100"
+        first = send(t)
+        got = len(extract_records(first)) if first is not None else 0
+        if got > size:
+            size = got
+        else:
+            t[size_k] = orig
+    if not page_k and not off_k:
+        return extract_records(send(t) or {})
+
+    out, seen, empty = [], set(), 0
+    start = int(t.get(page_k, 1) or 1) if page_k else int(t.get(off_k, 0) or 0)
+    for i in range(max_pages):
+        if page_k:
+            t[page_k] = start + i if isinstance(target[page_k], int) else str(start + i)
+        else:
+            t[off_k] = start + i * size if isinstance(target[off_k], int) else str(start + i * size)
+        data = send(t)
+        recs = extract_records(data) if data is not None else []
+        new = [r for r in recs if r["id"] not in seen]
+        if not new:
+            empty += 1
+            if empty >= 2:
+                break
+            continue
+        empty = 0
+        seen.update(r["id"] for r in new)
+        out += new
+    log(f"replay: {len(out)} records over {i + 1} requests (page size {size})")
+    return out
+
+
 def browser_discover(pages: list[str]) -> tuple[list[dict], list[str], list[dict]]:
-    """Open the pages in headless Chromium; return (records, api_urls, payloads)."""
+    """Open the pages in headless Chromium, find the publication API, and page through it.
+
+    Returns (records, api_urls, info)."""
     try:
         from playwright.sync_api import sync_playwright
     except ImportError:
         log("playwright not installed; skipping browser discovery")
         return [], [], []
-    payloads: list[tuple[str, object]] = []
+    payloads: list[tuple[dict, object]] = []
     html_links: set[str] = set()
     with sync_playwright() as p:
         browser = p.chromium.launch()
-        ctx = browser.new_context(user_agent=None, locale="ar-OM")
+        ctx = browser.new_context(locale="ar-OM")
         page = ctx.new_page()
 
         def on_response(resp):
@@ -228,7 +313,9 @@ def browser_discover(pages: list[str]) -> tuple[list[dict], list[str], list[dict
                 host = urlparse(resp.url).hostname or ""
                 ctype = (resp.headers.get("content-type") or "").lower()
                 if host.endswith("ncsi.gov.om") and "json" in ctype and resp.status == 200:
-                    payloads.append((resp.url, resp.json()))
+                    rq = resp.request
+                    payloads.append(({"url": resp.url, "method": rq.method, "post_data": rq.post_data,
+                                      "headers": rq.headers}, resp.json()))
             except Exception:
                 pass
 
@@ -251,19 +338,38 @@ def browser_discover(pages: list[str]) -> tuple[list[dict], list[str], list[dict
                 html_links |= {m for m in FILE_RE.findall(page.content())}
             except Exception as e:
                 log("browser: could not open", url, type(e).__name__, str(e)[:160])
+
+        # which captured requests returned publications?
+        api_reqs, seen_keys, seen_recs, info = [], set(), [], []
+        for rq, body in payloads:
+            recs = extract_records(body)
+            info.append({"url": rq["url"], "method": rq["method"], "post_data": (rq["post_data"] or "")[:400],
+                         "records": len(recs), "top_keys": list(body)[:12] if isinstance(body, dict) else f"list[{len(body)}]"})
+            if recs:
+                seen_recs += recs
+                key = (rq["method"], rq["url"], rq["post_data"])
+                if key not in seen_keys:
+                    seen_keys.add(key)
+                    api_reqs.append(rq)
+        log(f"browser: {len(payloads)} JSON responses, {len(api_reqs)} distinct publication requests, "
+            f"{len(seen_recs)} records seen, {len(html_links)} file links in HTML")
+
+        # page through each publication request inside the same browser session
+        replayed = []
+        for rq in api_reqs[:6]:
+            replayed += _replay(ctx, rq)
         browser.close()
 
-    api_urls, records, info = [], [], []
-    for url, body in payloads:
-        recs = extract_records(body)
-        info.append({"url": url, "records": len(recs)})
-        if recs:
-            api_urls.append(url)
-            records += recs
-    log(f"browser: {len(payloads)} JSON responses, {len(api_urls)} with publications, {len(html_links)} file links in HTML")
-    if not records and html_links:
-        records = [r for r in (normalise({"file": _abs(u)}) for u in html_links) if r]
-    return records, api_urls, info
+    html_recs = [r for r in (normalise({"file": _abs(u)}) for u in html_links) if r]
+    candidates = {"api-replay": replayed, "browser-json": seen_recs, "html-links": html_recs}
+    method = max(candidates, key=lambda k: len({r["id"] for r in candidates[k]}))
+    records = candidates[method]
+    if method != "api-replay" and replayed:
+        records = replayed + records  # keep API metadata where we have it
+    log(f"browser: using {method} ({len({r['id'] for r in candidates[method]})} publications); "
+        + ", ".join(f"{k}={len({r['id'] for r in v})}" for k, v in candidates.items()))
+    info.append({"chosen": method})
+    return records, [rq["url"] for rq in api_reqs if rq["method"] == "GET"], info
 
 
 def _endpoint_key(url: str) -> str:
@@ -295,10 +401,10 @@ def harvest() -> dict:
             got = crawl_endpoint(ep)
             log(f"crawl: {ep} -> {len(got)} records")
             crawled += got
-        records = crawled if len(crawled) >= len(recs) else recs
-        method = "api-discovered" if crawled else ("browser-json" if api_urls else "html-links")
-        if endpoints:
-            disc["endpoints"] = endpoints
+        chosen = next((i["chosen"] for i in info if "chosen" in i), "browser")
+        records = crawled if len({r["id"] for r in crawled}) > len({r["id"] for r in recs}) else recs
+        method = "api-direct-get" if records is crawled and crawled else chosen
+        disc["endpoints"] = endpoints  # only GET endpoints that work without the browser
         disc["last_discovery"] = {"at": iso(now_utc()), "responses": info[:40], "method": method}
         save_json(DISCOVERY, disc)
 

@@ -11,7 +11,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from common import DATA, iso, load_json, log, now_utc, save_json  # noqa: E402
+from common import DATA, iso, load_json, log, now_utc, save_json, settings  # noqa: E402
 import alerts  # noqa: E402
 import harvest as harvest_mod  # noqa: E402
 import nsdp  # noqa: E402
@@ -42,6 +42,10 @@ def main() -> int:
         harvest_mod.browser_discover = lambda pages: ([], [], [])
     h = harvest_mod.harvest()
     pub_events = []
+    min_base = settings().get("min_baseline_publications", 30)
+    if baseline and 0 < len(h["records"]) < min_base:
+        log(f"WARNING: only {len(h['records'])} publications harvested; not saving as the starting point (minimum {min_base})")
+        h["records"], h["method"] = [], h["method"] + "-partial"
     if h["records"]:
         pub_events = versions.merge(state, h["records"], baseline)
         pub_events += versions.recheck_provisional(state) if not baseline else []
