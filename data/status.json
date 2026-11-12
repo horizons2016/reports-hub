@@ -5,7 +5,7 @@
  "harvest_method": "api-replay",
  "endpoints": [],
  "publications": 1878,
- "events_this_run": 15,
+ "events_this_run": 0,
  "baseline_run": false,
  "harvest_ok": true,
  "nsdp_ok": 20,

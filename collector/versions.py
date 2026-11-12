@@ -129,7 +129,10 @@ def merge(state: dict, harvested: list[dict], baseline: bool) -> list[dict]:
             else:
                 fp = _fingerprint(url, tag, name)
                 if prev is None:
-                    status = "new" if is_new else "file_added"
+                    # a file newly noticed on an old publication is history unless it was uploaded recently
+                    old_pub = release is not None and now - release > timedelta(days=30)
+                    old_file = ts is None or now.timestamp() - ts > 30 * 86400
+                    status = "new" if is_new else ("baseline" if (old_pub and old_file) else "file_added")
                 else:
                     if not prev.get("sha256"):  # fingerprint the previous version if it is still online
                         old = fetch_file(prev["url"])
