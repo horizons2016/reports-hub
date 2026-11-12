@@ -74,6 +74,8 @@ def derive(pub: dict) -> None:
     # files named publicationpdf<ts>/publicationxls<ts> were re-uploaded in bulk when NCSI moved its
     # archive to the new site (Sep-Oct 2025): a migration, not a revision
     pub["migrated"] = any(re.search(r"/publication(pdf|xls)\d{10}\.", f.get("url", "")) for f in pub["files"].values())
+    # files from NCSI's earlier system (uploads/pdfs/<folder>/<name>.pdf) carry no upload time
+    pub["legacy"] = not any(f.get("ts") for f in pub["files"].values())
     pub["replaced_after_release"] = bool(delay is not None and delay > 0.01 and not pub["migrated"])
     prov = settings().get("provisional_days", 15)
     pub["provisional"] = bool(release and now_utc() - release <= timedelta(days=prov))

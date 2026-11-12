@@ -91,7 +91,7 @@
     const new7 = pubs.filter((p) => d(p.released_at) && now - d(p.released_at) <= 7 * DAY).length;
     const rev30 = state.events.filter((e) => REV_TYPES.has(e.type) && now - d(e.at) <= 30 * DAY).length;
     const prov = pubs.filter((p) => p.provisional);
-    const eligible = pubs.filter((p) => !p.migrated);
+    const eligible = pubs.filter((p) => !p.migrated && !p.legacy);
     const replaced = eligible.filter((p) => p.replaced_after_release).length;
     const fresh = state.nsdp.filter((c) => c.freshness === "fresh").length;
     const provDays = state.settings.provisional_days || 15;
@@ -246,7 +246,8 @@
         <div class="when"><a href="${esc(safeUrl(v.url))}" target="_blank" rel="noopener">الرابط لدى المركز</a>${v.archive_url ? ` · <a href="${esc(safeUrl(v.archive_url))}">نسخة مؤرشفة</a>` : ""}</div></li>`).join("")}</ol></div>`).join("");
     const delay = p.current_file_delay_days;
     const hist = p.replaced_after_release ? `<p class="small">الملف الحالي رُفع بعد ${esc(delay)} يوماً من النشر، أي أن الملف الأصلي استُبدل مرة واحدة على الأقل.</p>`
-      : p.migrated ? `<p class="small muted">إصدار من الأرشيف أُعيد رفع ملفاته عند نقل موقع المركز (سبتمبر–أكتوبر 2025).</p>` : "";
+      : p.migrated ? `<p class="small muted">إصدار من الأرشيف أُعيد رفع ملفاته عند نقل موقع المركز (سبتمبر–أكتوبر 2025).</p>`
+      : p.legacy ? `<p class="small muted">ملفات من نظام المركز السابق، لا تحمل وقت رفع. أي تعديل عليها من الآن يُرصد بالبصمة.</p>` : "";
     tr.insertAdjacentHTML("afterend", `<tr class="detail"><td colspan="6">${hist}<div class="vers">${vs}</div>
       <p class="small muted">السلسلة: ${esc(p.series || "—")} · رقم الإصدار لدى المركز: ${esc(p.publication_id ?? "—")} · أول رصد: ${esc(dateTxt(p.first_seen))}</p></td></tr>`);
   }
@@ -261,7 +262,7 @@
       : `<p class="empty">لم يُرصد أي تعديل منذ بدء الرصد. عند حدوثه يظهر هنا مع رابطي النسختين.</p>`;
 
     // historical delays
-    const eligible = state.pubs.filter((p) => !p.migrated);
+    const eligible = state.pubs.filter((p) => !p.migrated && !p.legacy);
     const migrated = state.pubs.length - eligible.length;
     const delays = eligible.filter((p) => p.replaced_after_release).map((p) => p.current_file_delay_days);
     const buckets = [["أقل من يوم", 0, 1], ["1–3 أيام", 1, 4], ["4–7 أيام", 4, 8], ["8–15 يوماً", 8, 16], ["16–30 يوماً", 16, 31], ["أكثر من 30", 31, 1e9]];
@@ -270,7 +271,7 @@
     const within15 = delays.filter((x) => x < 16).length;
     $("#rev-note").innerHTML = state.pubs.length ? `
       <p>من ${nf.format(eligible.length)} إصداراً، استُبدل ملف <b>${nf.format(delays.length)}</b> بعد نشره مرة واحدة على الأقل${delays.length ? `، و${nf.format(within15)} منها خلال 15 يوماً` : ""}.</p>
-      ${migrated ? `<p>استُبعد ${nf.format(migrated)} إصداراً قديماً أعاد المركز رفع ملفاته دفعةً واحدة عند نقل أرشيفه إلى الموقع الجديد (سبتمبر–أكتوبر 2025)؛ هذا نقل وليس تعديلاً.</p>` : ""}
+      ${migrated ? `<p>استُبعد ${nf.format(migrated)} إصداراً من الأرشيف: ملفاتها إما أُعيد رفعها دفعةً واحدة عند نقل موقع المركز (سبتمبر–أكتوبر 2025)، أو من النظام السابق ولا تحمل وقت رفع. لا يمكن الحكم على استبدالها تاريخياً، لكن أي تعديل عليها من الآن يُرصد.</p>` : ""}
       <p>الطريقة: نقارن وقت رفع الملف الحالي (مكتوب في اسمه) بوقت إنشاء سجل الإصدار لدى المركز. الفرق الأكبر من ربع ساعة يعني أن الملف الأصلي استُبدل.</p>
       <p>هذا حدّ أدنى: المركز يُبقي الملف الأخير فقط، فلا نعرف عدد مرات الاستبدال قبل بدء الرصد. منذ بدء الرصد تُعدّ كل نسخة.</p>` : `<p class="empty">تظهر القراءة بعد أول تشغيل.</p>`;
 

@@ -29,11 +29,21 @@ AR_MONTHS = "يناير فبراير مارس أبريل ابريل مايو ي�
 
 
 # ---------------------------------------------------------------- normalisation
+WHOLE_FILE_RE = re.compile(r"^(?:https?://api\.ncsi\.gov\.om/)?/?uploads/(?:pdfs|xls)/.+\.(?:pdf|xlsx?)$", re.I)
+
+
 def _abs(u: str) -> str:
-    u = u.strip()
+    u = u.strip().replace(" ", "%20")
     if u.startswith("http"):
         return u.replace("http://", "https://", 1)
     return settings().get("file_host", "https://api.ncsi.gov.om/") + u.lstrip("/")
+
+
+def _links_in(s: str) -> list[str]:
+    """File links in a string: the whole value if it is one upload path (spaces allowed), else any embedded links."""
+    if WHOLE_FILE_RE.match(s.strip()):
+        return [s.strip()]
+    return FILE_RE.findall(s)
 
 
 def _slot(key: str, url: str) -> str:
@@ -77,13 +87,21 @@ def normalise(raw: dict) -> dict | None:
     """Turn one API object that contains file links into a publication record."""
     files = {}
     for key, s in _walk_strings(raw):
-        for m in FILE_RE.findall(s):
+        for m in _links_in(s):
             url = _abs(m)
             slot = _slot(key.split(".")[-1], url)
             if slot not in files:  # first link per slot wins
                 files[slot] = {"url": url, "ts": file_ts(url)}
     if not files:
         return None
+    for kind in ("pdf", "xls"):
+        en, ar = files.get(f"{kind}_en"), files.get(f"{kind}_ar")
+        if en and ar and en["url"] == ar["url"]:
+            # the API repeats one file under both languages; keep the language whose raw field is filled
+            if raw.get(f"{kind}_file") in ("", None) and raw.get(f"{kind}_file_ar"):
+                files.pop(f"{kind}_en")
+            elif raw.get(f"{kind}_file_ar") in ("", None) and raw.get(f"{kind}_file"):
+                files.pop(f"{kind}_ar")
 
     title_en = _first(raw, "title_en", "name_en", "titleEn", "title")
     title_ar = _first(raw, "title_ar", "name_ar", "titleAr")
@@ -91,8 +109,16 @@ def normalise(raw: dict) -> dict | None:
         title_ar = title_ar or title_en.get("ar")
         title_en = title_en.get("en")
     cat = raw.get("category") if isinstance(raw.get("category"), dict) else {}
-    category_en = _first(raw, "category_en", "categoryEn") or _first(cat, "name_en", "title_en", "name")
-    category_ar = _first(raw, "category_ar", "categoryAr") or _first(cat, "name_ar", "title_ar")
+    cls = raw.get("classification")
+    if isinstance(cls, str):
+        try:
+            cls = json.loads(cls)
+        except ValueError:
+            cls = {}
+    cls = cls if isinstance(cls, dict) else {}
+    category_en = (_first(raw, "category_en", "categoryEn", "classification_title")
+                   or _first(cat, "name_en", "title_en", "name") or _first(cls, "name", "name_en"))
+    category_ar = _first(raw, "category_ar", "categoryAr") or _first(cat, "name_ar", "title_ar") or _first(cls, "name_ar")
 
     pid = _first(raw, "publication_id", "id", "publicationId")
     any_url = next(iter(files.values()))["url"]
@@ -128,7 +154,7 @@ def extract_records(payload) -> list[dict]:
 
     def visit(o):
         if isinstance(o, dict):
-            direct = any(isinstance(v, str) and FILE_RE.search(v) for v in o.values())
+            direct = any(isinstance(v, str) and _links_in(v) for v in o.values())
             nested_obj = any(isinstance(v, dict) and any(isinstance(x, str) and FILE_RE.search(x) for x in v.values())
                              for v in o.values())
             has_title = any(k in o for k in ("title", "title_en", "title_ar", "name_en", "publication_id"))
@@ -315,7 +341,7 @@ def _sample_raw(payload):
     """First raw object that holds a file link, with long values trimmed (for diagnosing field names)."""
     def visit(o):
         if isinstance(o, dict):
-            if any(isinstance(v, str) and FILE_RE.search(v) for v in o.values()):
+            if any(isinstance(v, str) and _links_in(v) for v in o.values()):
                 return {k: (v[:80] if isinstance(v, str) else v if not isinstance(v, (dict, list)) else
                             {kk: (str(vv)[:60]) for kk, vv in v.items()} if isinstance(v, dict) else f"list[{len(v)}]")
                         for k, v in o.items()}
