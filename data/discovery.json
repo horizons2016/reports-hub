@@ -1,0 +1,73 @@
+{
+ "endpoints": [],
+ "last_discovery": {
+  "at": "2026-11-12T21:38:30Z",
+  "responses": [
+   {
+    "url": "https://api.ncsi.gov.om/V1/publications/list",
+    "method": "POST",
+    "post_data": "{\"pagesize\":6,\"currentpage\":1,\"searchstring\":\"\",\"is_frontend\":true,\"sortorder\":{\"field\":\"created_at\",\"direction\":\"desc\"},\"filter\":{\"type\":\"\",\"classification_id\":\"\",\"status\":1,\"publication_status\":\"published\"}}",
+    "records": 6,
+    "top_keys": [
+     "message",
+     "data"
+    ]
+   },
+   {
+    "url": "https://api.ncsi.gov.om/V1/publications/list",
+    "method": "POST",
+    "post_data": "{\"pagesize\":6,\"currentpage\":1,\"searchstring\":\"\",\"is_frontend\":true,\"sortorder\":{\"field\":\"created_at\",\"direction\":\"desc\"},\"filter\":{\"type\":\"\",\"classification_id\":\"\",\"status\":1,\"publication_status\":\"published\"}}",
+    "records": 6,
+    "top_keys": [
+     "message",
+     "data"
+    ]
+   },
+   {
+    "url": "https://api.ncsi.gov.om/V1/publications/list",
+    "method": "POST",
+    "post_data": "{\"pagesize\":6,\"currentpage\":1,\"searchstring\":\"\",\"is_frontend\":true,\"sortorder\":{\"field\":\"created_at\",\"direction\":\"desc\"},\"filter\":{\"type\":\"\",\"classification_id\":\"\",\"status\":1,\"publication_status\":\"published\"}}",
+    "records": 6,
+    "top_keys": [
+     "message",
+     "data"
+    ]
+   },
+   {
+    "url": "https://api.ncsi.gov.om/V1/publications/list",
+    "method": "POST",
+    "post_data": "{\"pagesize\":6,\"currentpage\":1,\"searchstring\":\"\",\"is_frontend\":true,\"sortorder\":{\"field\":\"created_at\",\"direction\":\"desc\"},\"filter\":{\"type\":\"\",\"classification_id\":\"\",\"status\":1,\"publication_status\":\"published\"}}",
+    "records": 6,
+    "top_keys": [
+     "message",
+     "data"
+    ]
+   },
+   {
+    "url": "https://www.ncsi.gov.om/_next/data/JaLbQ93PePRgzOHmLum1B/ar/event-details/33.json?id=33",
+    "method": "GET",
+    "post_data": "",
+    "records": 0,
+    "top_keys": []
+   },
+   {
+    "url": "https://www.ncsi.gov.om/_next/data/JaLbQ93PePRgzOHmLum1B/ar/event-details/32.json?id=32",
+    "method": "GET",
+    "post_data": "",
+    "records": 0,
+    "top_keys": []
+   },
+   {
+    "url": "https://www.ncsi.gov.om/_next/data/JaLbQ93PePRgzOHmLum1B/ar/events.json",
+    "method": "GET",
+    "post_data": "",
+    "records": 0,
+    "top_keys": []
+   },
+   {
+    "chosen": "api-replay"
+   }
+  ],
+  "method": "api-replay"
+ }
+}
