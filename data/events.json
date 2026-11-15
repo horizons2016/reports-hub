@@ -1,4 +1,18 @@
 {
- "updated_at": "2026-11-15T09:33:47Z",
- "events": []
+ "updated_at": "2026-11-15T17:22:09Z",
+ "events": [
+  {
+   "at": "2026-11-15T17:16:06Z",
+   "type": "new",
+   "id": "ncsi-pub-1982",
+   "slot": "all",
+   "version": 1,
+   "title_ar": "مؤشرات إحصاءات الطاقة : نوفمبر 2026",
+   "title_en": "Energy Statistics Indicators: November 2026",
+   "url": "https://api.ncsi.gov.om/uploads/pdfs/energy_statistics_indicators__november_2026_1794739664.pdf",
+   "uploaded": "2026-11-15T10:47:44Z",
+   "previous": null,
+   "issue_url": "https://github.com/horizons2016/reports-hub/issues/3"
+  }
+ ]
 }
