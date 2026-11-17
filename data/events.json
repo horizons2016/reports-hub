@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-16T20:37:22Z",
+ "updated_at": "2026-11-17T10:53:30Z",
  "events": [
   {
    "at": "2026-11-15T17:16:06Z",
@@ -13,6 +13,19 @@
    "uploaded": "2026-11-15T10:47:44Z",
    "previous": null,
    "issue_url": "https://github.com/horizons2016/reports-hub/issues/3"
+  },
+  {
+   "at": "2026-11-17T10:48:32Z",
+   "type": "new",
+   "id": "ncsi-pub-1993",
+   "slot": "all",
+   "version": 1,
+   "title_ar": "الأرقام القياسية لأسعار الواردات : الربع الرابع 2025",
+   "title_en": "Import Price Indices for the Sultanate in the Fourth Quarter 2025",
+   "url": "https://api.ncsi.gov.om/uploads/pdfs/import_price_indices_for_the_sultanate_in_the_fourth_quarter_2025_1794901967.pdf",
+   "uploaded": "2026-11-17T07:52:47Z",
+   "previous": null,
+   "issue_url": "https://github.com/horizons2016/reports-hub/issues/4"
   }
  ]
 }
