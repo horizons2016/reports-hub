@@ -1,7 +1,7 @@
 {
  "repository": "horizons2016/reports-hub",
- "last_run": "2026-11-18T10:20:51Z",
- "finished": "2026-11-18T10:26:07Z",
+ "last_run": "2026-11-18T18:54:33Z",
+ "finished": "2026-11-18T19:00:19Z",
  "harvest_method": "api-replay",
  "endpoints": [],
  "publications": 1880,
