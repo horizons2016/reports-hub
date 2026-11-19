@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-18T19:00:19Z",
+ "updated_at": "2026-11-19T10:41:24Z",
  "events": [
   {
    "at": "2026-11-15T17:16:06Z",
@@ -26,6 +26,19 @@
    "uploaded": "2026-11-17T07:52:47Z",
    "previous": null,
    "issue_url": "https://github.com/horizons2016/reports-hub/issues/4"
+  },
+  {
+   "at": "2026-11-19T10:36:29Z",
+   "type": "new",
+   "id": "ncsi-pub-1973",
+   "slot": "all",
+   "version": 1,
+   "title_ar": "النشرة الإحصائية الشهرية : نوفمبر 2026",
+   "title_en": "Monthly Statistical Bulletin :November 2026",
+   "url": "https://api.ncsi.gov.om/uploads/pdfs/monthly_statistical_bulletin__november_2026_1795081756.pdf",
+   "uploaded": "2026-11-19T09:49:16Z",
+   "previous": null,
+   "issue_url": "https://github.com/horizons2016/reports-hub/issues/5"
   }
  ]
 }
