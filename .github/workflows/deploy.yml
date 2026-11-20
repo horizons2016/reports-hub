@@ -28,6 +28,7 @@ jobs:
           mkdir -p _site/data
           cp -r site/* _site/
           cp data/*.json data/feed.xml _site/data/ 2>/dev/null || true
+          [ -d data/diffs ] && cp -r data/diffs _site/data/ || true
           cp config/settings.json config/indicators.json config/bulletin_tables.json _site/data/
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3

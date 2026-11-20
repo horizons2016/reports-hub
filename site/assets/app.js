@@ -122,12 +122,41 @@
     monthsChart();
   }
 
+  /* ---------------- what changed and where ---------------- */
+  function diffBox(e) {
+    const d = e.diff;
+    if (!d) return "";
+    return `<details class="diff"${d.file ? ` data-diff="${esc(d.file)}"` : ""}><summary><b>ماذا تغيّر:</b> ${esc(d.summary_ar || "")}</summary><div class="diff-body">${d.file ? `<p class="small muted">جارٍ التحميل…</p>` : ""}</div></details>`;
+  }
+  function renderDiff(d) {
+    if (d.error) return `<p class="small muted">${esc(d.summary_ar)}</p>`;
+    const kind = d.kind === "xlsx" ? "ورقة" : "جدول";
+    const links = `<p class="small">قارن بنفسك: <a href="${esc(safeUrl(d.old_url))}" rel="noopener">النسخة v${esc(d.from_v)}</a> · <a href="${esc(safeUrl(d.new_url))}" rel="noopener">النسخة v${esc(d.to_v)}</a></p>`;
+    const tabs = (d.tables || []).map((t) => {
+      const head = t.table ? `${kind} <bdi>${esc(t.table)}</bdi>${t.title ? " — " + esc(t.title) : ""}` : `صفحة ${esc(t.page)}`;
+      const rows = t.changes.map((c) => `<tr><td>${esc(c.row)}</td><td class="num">${esc(c.cell || (c.col ? "عمود " + c.col : c.added ? "صف جديد" : c.removed ? "صف حُذف" : ""))}</td>
+        <td class="num old">${esc(c.old ?? "—")}</td><td class="num new">${esc(c.new ?? "—")}</td><td class="num hide-s">${c.page ? (d.new_url ? `<a href="${esc(safeUrl(d.new_url))}#page=${c.page}" rel="noopener">${c.page}</a>` : c.page) : ""}</td></tr>`).join("");
+      return `<div class="diff-t"><h4>${head}${t.page ? ` <span class="muted">· صفحة ${esc(t.page)}</span>` : ""} <span class="muted">· ${esc(t.n ?? t.changes.length)} تغيير</span></h4>
+        <table class="tbl"><thead><tr><th>البند</th><th>الموضع</th><th>قبل</th><th>بعد</th><th class="hide-s">الصفحة</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+    }).join("");
+    const txt = (d.text_pages || []).length ? `<p class="small">تغيّر نص (دون أرقام) في الصفحات: ${d.text_pages.map(esc).join("، ")}</p>` : "";
+    return links + tabs + txt + (d.truncated ? `<p class="small muted">عُرضت أول 400 تغيير فقط.</p>` : "");
+  }
+  document.addEventListener("toggle", (ev) => {
+    const el = ev.target;
+    if (!(el instanceof HTMLDetailsElement) || !el.open || !el.dataset.diff || el.dataset.loaded) return;
+    el.dataset.loaded = "1";
+    fetch("data/" + el.dataset.diff, { cache: "no-cache" }).then((r) => r.ok ? r.json() : null)
+      .then((d) => { el.querySelector(".diff-body").innerHTML = d ? renderDiff(d) : `<p class="small muted">تعذّر تحميل التفاصيل.</p>`; })
+      .catch(() => { el.querySelector(".diff-body").innerHTML = `<p class="small muted">تعذّر تحميل التفاصيل.</p>`; });
+  }, true);
+
   function eventLi(e) {
     const name = e.title_ar || e.title_en || e.id;
     const slot = e.slot && e.slot !== "all" ? ` · ${SLOT_LONG[e.slot] || e.slot}` : "";
     const det = e.detail ? ` · ${fromTo(e.detail)}` : "";
     const link = e.issue_url || e.url;
-    return `<li>${evChip(e.type)}<div class="t"><b>${link ? `<a href="${esc(safeUrl(link))}" rel="noopener">${esc(name)}</a>` : esc(name)}</b><div class="meta">${esc(dtTxt(e.at))}${esc(slot)}${det}</div></div></li>`;
+    return `<li>${evChip(e.type)}<div class="t"><b>${link ? `<a href="${esc(safeUrl(link))}" rel="noopener">${esc(name)}</a>` : esc(name)}</b><div class="meta">${esc(dtTxt(e.at))}${esc(slot)}${det}</div>${diffBox(e)}</div></li>`;
   }
 
   function monthsChart() {
@@ -260,7 +289,7 @@
     $("#since-hint").textContent = state.status.monitoring_since ? `منذ ${dateTxt(state.status.monitoring_since)}` : "";
     const revs = state.events.filter((e) => REV_TYPES.has(e.type) || e.type === "reupload");
     $("#rev-live").innerHTML = revs.length ? `<table class="tbl"><thead><tr><th>الوقت</th><th>النوع</th><th>الإصدار</th><th class="hide-s">الملف</th><th>النسختان</th></tr></thead><tbody>${revs.map((e) => `
-      <tr><td class="num small">${esc(dtTxt(e.at))}</td><td>${evChip(e.type)}</td><td>${esc(e.title_ar || e.title_en)}</td><td class="hide-s small">${esc(SLOT_LONG[e.slot] || e.slot || "")}</td>
+      <tr><td class="num small">${esc(dtTxt(e.at))}</td><td>${evChip(e.type)}</td><td>${esc(e.title_ar || e.title_en)}${diffBox(e)}</td><td class="hide-s small">${esc(SLOT_LONG[e.slot] || e.slot || "")}</td>
       <td class="small">${e.previous ? `من <a href="${esc(safeUrl(e.previous.archive_url || e.previous.url))}">v${e.previous.v}</a> إلى ` : ""}<a href="${esc(safeUrl(e.url))}">v${esc(e.version)}</a></td></tr>`).join("")}</tbody></table>`
       : `<p class="empty">لم يُرصد أي تعديل منذ بدء الرصد. عند حدوثه يظهر هنا مع رابطي النسختين.</p>`;
 

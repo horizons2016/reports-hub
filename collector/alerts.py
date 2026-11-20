@@ -59,7 +59,10 @@ def _body(e: dict) -> str:
     d = e.get("detail")
     if d:
         lines.append(f"- آخر فترة: {d.get('from') or '—'} ← {d.get('to') or '—'}")
-    if e["type"] in ("revision", "revision_same_url"):
+    if e.get("diff"):
+        lines += [""] + e["diff"].get("lines", [e["diff"].get("summary_ar", "")])
+        lines += ["", f"التفاصيل الكاملة: {_site_url()}#revisions"]
+    elif e["type"] in ("revision", "revision_same_url"):
         lines += ["", "> الأرقام المأخوذة من النسخة السابقة قد تكون تغيّرت. راجع الجداول المعنية قبل الاقتباس."]
     lines += ["", f"اللوحة: {_site_url()}", "", "_أُنشئ تلقائياً بواسطة مستودع البيانات والتقارير._"]
     return "\n".join(lines)

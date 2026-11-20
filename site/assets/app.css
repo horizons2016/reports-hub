@@ -149,3 +149,11 @@ bdi[dir=ltr]{unicode-bidi:isolate;direction:ltr}
   .tbl th,.tbl td{padding:9px 10px}
   .kpi .val{font-size:26px}
 }
+
+/* what changed and where */
+.diff{margin-top:6px;font-size:13px}
+.diff summary{cursor:pointer;color:var(--ink,inherit)}
+.diff-body{margin-top:8px;max-height:520px;overflow:auto}
+.diff-t h4{margin:10px 0 4px;font-size:13px}
+.diff td.old{color:#b23a32;text-decoration:line-through;text-decoration-thickness:1px}
+.diff td.new{color:#1f7a3f;font-weight:600}

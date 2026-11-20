@@ -16,6 +16,7 @@ import alerts  # noqa: E402
 import harvest as harvest_mod  # noqa: E402
 import nsdp  # noqa: E402
 import versions  # noqa: E402
+import diffs  # noqa: E402
 
 STATE = DATA / "publications.json"
 NSDP = DATA / "nsdp.json"
@@ -56,6 +57,8 @@ def main() -> int:
     nsdp_baseline = not state["nsdp"]
     nsdp_events = [] if args.skip_nsdp else nsdp.check(state, nsdp_baseline)
 
+    if pub_events:
+        diffs.attach(pub_events)
     new_events = pub_events + nsdp_events
     extra = []
     if baseline and h["records"]:
