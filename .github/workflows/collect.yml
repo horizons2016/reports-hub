@@ -2,7 +2,8 @@ name: رصد إصدارات المركز (collect)
 
 on:
   schedule:
-    - cron: "17 2,10 * * *"   # 06:17 and 14:17 Muscat time
+    - cron: "23 3-13 * * 0-4"   # كل ساعة خلال دوام المركز (07:23–17:23 بتوقيت مسقط، الأحد–الخميس)
+    - cron: "47 */4 * * *"       # كل 4 ساعات في بقية الأوقات (احتياط لتأخر جدولة GitHub)
   workflow_dispatch:
     inputs:
       no_issues:

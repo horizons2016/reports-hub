@@ -1,4 +1,4 @@
-/* مستودع البحوث والتقارير — dashboard. Reads data/*.json written by the collector. */
+/* مستودع البيانات والتقارير — dashboard. Reads data/*.json written by the collector. */
 (() => {
   "use strict";
   const $ = (s, el = document) => el.querySelector(s);
@@ -70,8 +70,11 @@
     $("#repo-link").href = `https://github.com/${repo}`;
     if (!s.last_run) { el.className = "run warn"; el.innerHTML = `<span class="dot"></span><span>لم يكتمل أول تشغيل بعد</span>`; return; }
     const ok = s.harvest_ok && s.nsdp_ok > 0;
-    el.className = "run " + (ok ? "ok" : s.harvest_ok || s.nsdp_ok ? "warn" : "bad");
-    el.innerHTML = `<span class="dot"></span><span>آخر تحديث: ${esc(dtTxt(s.finished || s.last_run))}</span>`;
+    const ageH = (Date.now() - new Date(s.finished || s.last_run).getTime()) / 36e5, stale = ageH > 8;
+    const ago = ageH < 1 ? `قبل ${Math.max(1, Math.round(ageH * 60))} دقيقة` : ageH < 48 ? `قبل ${Math.round(ageH)} ساعة` : `قبل ${Math.round(ageH / 24)} يوماً`;
+    el.className = "run " + (ok && !stale ? "ok" : s.harvest_ok || s.nsdp_ok ? "warn" : "bad");
+    el.innerHTML = `<span class="dot"></span><span>آخر فحص: ${esc(ago)} · ${esc(dtTxt(s.finished || s.last_run))}</span>`;
+    el.title = stale ? "تأخر الفحص الدوري أكثر من 8 ساعات؛ تحقق من سجل التشغيل" : "يُفحص موقع المركز كل ساعة خلال الدوام وكل 4 ساعات في غيره";
     const b = $("#banner");
     if (!s.harvest_ok) {
       b.innerHTML = `<div class="banner warn"><b>تعذّرت قراءة قائمة الإصدارات في آخر تشغيل.</b> تُعرض آخر بيانات محفوظة. تفاصيل التشغيل في <a href="https://github.com/${esc(repo)}/actions">سجل التشغيل</a>.</div>`;
