@@ -17,7 +17,7 @@ CONFIG = ROOT / "config"
 ARCHIVE_OUT = ROOT / "archive_out"   # files to upload to GitHub Releases (not committed)
 
 UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
-      "Chrome/124.0 Safari/537.36 reports-hub/1.0 (+https://github.com/horizons2016/reports-hub)")
+      "Chrome/124.0 Safari/537.36 reports-hub/1.0 (+https://github.com/ov2040/reports-hub)")
 
 FILE_RE = re.compile(r"(?:https?://api\.ncsi\.gov\.om/)?/?uploads/(?:pdfs|xls)/[^\"'\s<>)\\]+?\.(?:pdf|xlsx?)", re.I)
 TS_RE = re.compile(r"(\d{10})\.(?:pdf|xlsx?)$", re.I)

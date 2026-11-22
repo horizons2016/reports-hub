@@ -55,7 +55,7 @@ def _release_tag(at) -> str:
 
 def _repo_download(tag: str, name: str) -> str:
     import os
-    repo = os.environ.get("GITHUB_REPOSITORY", "horizons2016/reports-hub")
+    repo = os.environ.get("GITHUB_REPOSITORY", "ov2040/reports-hub")
     return f"https://github.com/{repo}/releases/download/{tag}/{name}"
 
 

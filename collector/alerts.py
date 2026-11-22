@@ -27,7 +27,7 @@ def type_ar(t: str) -> str:
 
 
 def _site_url() -> str:
-    repo = os.environ.get("GITHUB_REPOSITORY", "horizons2016/reports-hub")
+    repo = os.environ.get("GITHUB_REPOSITORY", "ov2040/reports-hub")
     owner, name = repo.split("/")
     return f"https://{owner}.github.io/{name}/"
 

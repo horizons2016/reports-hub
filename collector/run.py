@@ -83,7 +83,7 @@ def main() -> int:
     save_json(EVENTS, {"updated_at": iso(now_utc()), "events": events_log})
     import os
     status.update({
-        "repository": os.environ.get("GITHUB_REPOSITORY", status.get("repository", "horizons2016/reports-hub")),
+        "repository": os.environ.get("GITHUB_REPOSITORY", status.get("repository", "ov2040/reports-hub")),
         "last_run": iso(started), "finished": iso(now_utc()),
         "harvest_method": h["method"], "endpoints": h["endpoints"],
         "publications": len(pubs), "events_this_run": len(new_events),
