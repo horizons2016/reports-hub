@@ -84,7 +84,7 @@
   }
   function guessRepo() {
     const h = location.hostname.split(".")[0], p = location.pathname.split("/").filter(Boolean)[0];
-    return location.hostname.endsWith("github.io") && p ? `${h}/${p}` : "horizons2016/reports-hub";
+    return location.hostname.endsWith("github.io") && p ? `${h}/${p}` : "ov2040/reports-hub";
   }
 
   /* ---------------- overview ---------------- */
