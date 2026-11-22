@@ -1,7 +1,7 @@
 {
  "endpoints": [],
  "last_discovery": {
-  "at": "2026-11-22T19:53:30Z",
+  "at": "2026-11-22T22:09:38Z",
   "responses": [
    {
     "url": "https://api.ncsi.gov.om/V1/publications/list",
