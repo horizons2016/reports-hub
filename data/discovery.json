@@ -1,7 +1,7 @@
 {
  "endpoints": [],
  "last_discovery": {
-  "at": "2026-11-28T08:30:20Z",
+  "at": "2026-11-28T17:14:37Z",
   "responses": [
    {
     "url": "https://api.ncsi.gov.om/V1/publications/list",
@@ -180,7 +180,7 @@
     }
    },
    {
-    "url": "https://www.ncsi.gov.om/_next/data/JaLbQ93PePRgzOHmLum1B/ar/event-details/32.json?id=32",
+    "url": "https://www.ncsi.gov.om/_next/data/JaLbQ93PePRgzOHmLum1B/ar/event-details/33.json?id=33",
     "method": "GET",
     "post_data": "",
     "records": 0,
@@ -194,7 +194,7 @@
     "top_keys": []
    },
    {
-    "url": "https://www.ncsi.gov.om/_next/data/JaLbQ93PePRgzOHmLum1B/ar/event-details/33.json?id=33",
+    "url": "https://www.ncsi.gov.om/_next/data/JaLbQ93PePRgzOHmLum1B/ar/event-details/32.json?id=32",
     "method": "GET",
     "post_data": "",
     "records": 0,

@@ -1,7 +1,7 @@
 {
  "repository": "ov2040/reports-hub",
- "last_run": "2026-11-28T08:29:00Z",
- "finished": "2026-11-28T08:32:29Z",
+ "last_run": "2026-11-28T17:13:10Z",
+ "finished": "2026-11-28T17:17:21Z",
  "harvest_method": "api-replay",
  "endpoints": [],
  "publications": 1881,
